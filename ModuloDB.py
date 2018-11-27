@@ -10,6 +10,7 @@ calls_df, = pd.read_html("http://www.cee.uma.pt/hardlab/wsngroup/wsn/realtimeinf
 
 data = calls_df.to_json(orient="records", date_format="iso") #transforma dados em formato json
 print(data) #debug
+##GUARDAR COMO FICHEIRO .txt
 values = json.loads(data) #carrega json como objeto
 
 print(type(values)) #debug para saber tipo do json
