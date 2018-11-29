@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SmartUMa - Current State</title>
+</head>
+<body>
+
+    <div id="currentWeather">
+        <h3>Weather <a href="/teste">[More]</a></h3>
+        <ul class="dataList">
+            <li>
+                Temperature: {{weather.temperature}} ºC
+            </li>
+            <li>
+                Humidity: {{weather.humidity}} %
+            </li>
+            <li>
+                Wind Speed: {{weather.wind_speed}} m/s
+            </li>
+            <li>
+                Wind Direction: {{weather.wind_direction}}
+            </li>
+            <li>
+                Solar Intensity: {{weather.solar_intensity}} W/m<sup>2</sup>
+            </li>
+            <li>
+                Time: {{weather.timestamp}}
+            </li>
+        </ul>
+    </div>
+
+    <div id="currentParking">
+        <h3>Parking <a href="/teste">[More]</a></h3>
+        <ul class="dataList">
+            <li>
+                Occupation: {{parking.occupation}} / 256
+            </li>
+            <li>
+                Time: {{parking.timestamp}}
+            </li>
+        </ul>
+    </div>
+
+    <div id="currentNetwork">
+        <h3>Network <a href="/teste">[More]</a></h3>
+        <ul class="dataList">
+            <li>
+                Latency: {{network.latency}} ms
+            </li>
+            <li>
+                Download Speed: {{network.download_speed}} Mbps
+            </li>
+            <li>
+                Upload Speed: {{network.upload_speed}} Mbps
+            </li>
+            <li>
+                Time: {{network.timestamp}}
+            </li>
+        </ul>
+    </div>
+
+    <div id="currentStudyRoom">
+        <h3>Study Rooms <a href="/teste">[More]</a></h3>
+        <ul class="dataList">
+            <li>
+                Ground Floor:
+                <ul>
+                    <li>
+                        Temperature: {{studyroom0.temperature}} ºC
+                    </li>
+                    <li>
+                        Occupation: {{studyroom0.occupation}} / 30
+                    </li>
+                    <li>
+                        Noise: {{studyroom0.noise}} dB
+                    </li>
+                </ul>
+            </li>
+            <li>
+                1st Floor:
+                <ul>
+                    <li>
+                        Temperature: {{studyroom1.temperature}} ºC
+                    </li>
+                    <li>
+                        Occupation: {{studyroom1.occupation}} / 30
+                    </li>
+                    <li>
+                        Noise: {{studyroom1.noise}} dB
+                    </li>
+                </ul>
+            </li>
+            <li>
+                2nd Floor:
+                <ul>
+                    <li>
+                        Temperature: {{studyroom2.temperature}} ºC
+                    </li>
+                    <li>
+                        Occupation: {{studyroom2.occupation}} / 50
+                    </li>
+                    <li>
+                        Noise: {{studyroom2.noise}} dB
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Computer Room:
+                <ul>
+                    <li>
+                        Temperature: {{studyroom2PC.temperature}} ºC
+                    </li>
+                    <li>
+                        Occupation: {{studyroom2PC.occupation}} / 10
+                    </li>
+                    <li>
+                        Noise: {{studyroom2PC.noise}} dB
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Library:
+                <ul>
+                    <li>
+                        Temperature: {{studyroom3.temperature}} ºC
+                    </li>
+                    <li>
+                        Occupation: {{studyroom3.occupation}} / 60
+                    </li>
+                    <li>
+                        Noise: {{studyroom3.noise}} dB
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Time: {{studyroom3.timestamp}}
+            </li>
+        </ul>
+    </div>
+
+</body>
+</html>
