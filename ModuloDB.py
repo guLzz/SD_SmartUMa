@@ -16,7 +16,7 @@ def convert_insert():
 
     data = calls_df.to_json(orient="records", date_format="iso") #transforma dados em formato json
     print(data) #debug
-    #GUARDAR COMO FICHEIRO .txt para fazer a API com isso
+    #GUARDAR COMO FICHEIRO .json para fazer a API com isso
     values = json.loads(data) #carrega json como objeto
 
     print(type(values)) #debug para saber tipo do json
@@ -27,10 +27,9 @@ def convert_insert():
         print(get_num(value['Unnamed: 1'])) #imprime valor dentro do unnamed1 usando a função get_enum para retirar unidades
         valor.append(get_num(value['Unnamed: 1']))
 
-    print(datetime.datetime.now()) #debug para o timestamp
+    print(datetime.datetime.now()) #debug para o timestamp  
 
-        #trata da inserção dos valores na base de dados nas tabelas respetivas
-
+    #trata da inserção dos valores na base de dados nas tabelas respetivas
     mydb = mysql.connect(
     host="localhost",
     user="root",
@@ -40,12 +39,16 @@ def convert_insert():
 
     mycursor = mydb.cursor()
 
-    sql = "INSERT INTO Metereologia (temperatura, humidade, radiação, velocidade_vento, direcao_vento, timestamp) VALUES (%f, %f, %f, %f, %f, datetime.datetime.now())"
-    val = (valor[0],valor[1],valor[2],valor[3], valor[4])
+    sql = "INSERT INTO Metereologia (temperatura, humidade, radiacao, velocidade_vento, direcao_vento, timestamp) VALUES ("+str(valor[0])+", "+str(valor[1])+", "+str(valor[2])+", "+str(valor[3])+", "+str(valor[4])+", "+str(datetime.datetime.now())+")"
+    #val = (valor[0],valor[1],valor[2],valor[3], valor[4])
 
-    mycursor.execute(sql, val)
+    #debug da query
+    #print(sql)
 
-    mydb.commit()
+    mycursor.execute(sql)
+    mydb.commit()   
+
+    return sql
 
 
 #Serve apenas para debug, sendo que todo o codigo sera chamado noutro sitio

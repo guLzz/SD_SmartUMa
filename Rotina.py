@@ -1,6 +1,32 @@
 import time
-from ModuloDB import convert_insert
+from threading import *
+from ModuloDB import *
 
-while(True):
-    convert_insert()
-    time.sleep(60)
+#trata dados e envia para a replicacao
+def handle_data():   
+    sql = convert_insert()
+    db_data(sql)
+
+#trata da base de dados principal (escrita)
+def db_data(sql):
+    mydb = mysql.connect(
+    host="localhost",
+    user="root",
+    passwd="",
+    database="mydatabase"
+    )
+
+    mycursor = mydb.cursor()
+    mycursor.execute(sql)
+    mydb.commit()
+
+#trata pedidos do servidor 
+def listen_request():
+    return False
+
+#create thread
+thread = Timer(60, handle_data)
+thread_listen = Timer(5,listen_request)
+
+thread.start()
+thread_listen.start()
