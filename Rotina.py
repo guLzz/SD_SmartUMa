@@ -9,11 +9,11 @@ def handle_data():
 
 #trata da base de dados principal (escrita)
 def db_data(sql):
-    mydb = mysql.connect(
+    mydb = pymysql.connect(
     host="localhost",
     user="root",
     passwd="",
-    database="mydatabase"
+    database="smartuma"
     )
 
     mycursor = mydb.cursor()

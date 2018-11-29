@@ -2,8 +2,9 @@ import pandas as pd
 import json
 from collections import namedtuple
 import re
-import pymysql as mysql
-import datetime
+import pymysql.cursors
+from datetime import datetime
+import time
 
 #funcao para retornar apenas floats 
 def get_num(x):
@@ -25,21 +26,28 @@ def convert_insert():
 
     for value in values:
         print(get_num(value['Unnamed: 1'])) #imprime valor dentro do unnamed1 usando a função get_enum para retirar unidades
-        valor.append(get_num(value['Unnamed: 1']))
+        valor.append(get_num(value['Unnamed: 1']))        
 
-    print(datetime.datetime.now()) #debug para o timestamp  
+      
+
 
     #trata da inserção dos valores na base de dados nas tabelas respetivas
-    mydb = mysql.connect(
+    mydb = pymysql.connect(
     host="localhost",
     user="root",
     passwd="",
-    database="mydatabase"
+    database="smartumarep"
     )
 
     mycursor = mydb.cursor()
 
-    sql = "INSERT INTO Metereologia (temperatura, humidade, radiacao, velocidade_vento, direcao_vento, timestamp) VALUES ("+str(valor[0])+", "+str(valor[1])+", "+str(valor[2])+", "+str(valor[3])+", "+str(valor[4])+", "+str(datetime.datetime.now())+")"
+    print(datetime.now()) #debug para o timestamp
+    tim = datetime.now()
+    valor.append('{:%Y-%m-%d %H:%M:%S}'.format(tim))
+    print(valor[5])
+
+    #sql = "INSERT INTO weather_weather (temperature, humidity, radiacao, velocidade_vento, direcao_vento, timestamp) VALUES ("+str(valor[0])+", "+str(valor[1])+", "+str(valor[2])+", "+str(valor[3])+", "+str(valor[4])+", "+str(datetime.datetime.now())+")"
+    sql = "INSERT INTO weather_weather (temperature, humidity, wind_speed, wind_direction, solar_intensity, timestamp) VALUES ("+str(valor[0])+", "+str(valor[1])+", "+str(valor[3])+", "+str(valor[4])+", "+str(valor[2])+","+valor[5]+")"
     #val = (valor[0],valor[1],valor[2],valor[3], valor[4])
 
     #debug da query
