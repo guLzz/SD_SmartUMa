@@ -5,30 +5,32 @@ import re
 import pymysql as mysql
 import datetime
 
-
-calls_df, = pd.read_html("http://www.cee.uma.pt/hardlab/wsngroup/wsn/realtimeinfo.php", header=0,attrs = {'width': '230', 'style': 'font-size:small;color:#333333;'}) #acede tabela com atributos especificados no site especificado
-
-data = calls_df.to_json(orient="records", date_format="iso") #transforma dados em formato json
-print(data) #debug
-##GUARDAR COMO FICHEIRO .txt
-values = json.loads(data) #carrega json como objeto
-
-print(type(values)) #debug para saber tipo do json
-
 #funcao para retornar apenas floats 
 def get_num(x):
     return float(''.join(ele for ele in x if ele.isdigit() or ele == '.'))
 
-valor = []
 
-for value in values:
-    print(get_num(value['Unnamed: 1'])) #imprime valor dentro do unnamed1 usando a função get_enum para retirar unidades
-    valor.append(get_num(value['Unnamed: 1']))
+def convert_insert():
+    
+    calls_df, = pd.read_html("http://www.cee.uma.pt/hardlab/wsngroup/wsn/realtimeinfo.php", header=0,attrs = {'width': '230', 'style': 'font-size:small;color:#333333;'}) #acede tabela com atributos especificados no site especificado
 
-print(datetime.datetime.now()) #debug para o timestamp
+    data = calls_df.to_json(orient="records", date_format="iso") #transforma dados em formato json
+    print(data) #debug
+    #GUARDAR COMO FICHEIRO .txt para fazer a API com isso
+    values = json.loads(data) #carrega json como objeto
 
-#trata da inserção dos valores na base de dados nas tabelas respetivas
-def insere_db():
+    print(type(values)) #debug para saber tipo do json
+
+    valor = []
+
+    for value in values:
+        print(get_num(value['Unnamed: 1'])) #imprime valor dentro do unnamed1 usando a função get_enum para retirar unidades
+        valor.append(get_num(value['Unnamed: 1']))
+
+    print(datetime.datetime.now()) #debug para o timestamp
+
+        #trata da inserção dos valores na base de dados nas tabelas respetivas
+
     mydb = mysql.connect(
     host="localhost",
     user="root",
@@ -44,4 +46,9 @@ def insere_db():
     mycursor.execute(sql, val)
 
     mydb.commit()
+
+
+#Serve apenas para debug, sendo que todo o codigo sera chamado noutro sitio
+if __name__ == "__main__":
+    convert_insert()
 
