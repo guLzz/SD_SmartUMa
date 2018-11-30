@@ -8,10 +8,10 @@ from ModuloDB import convertToValue
 
 #trata dados e envia para a replicacao
 def handle_data():   
-    for x in range(3):
+    while(True):
         insertRep()
         insertServer()
-        time.sleep(10)
+        time.sleep(60)
 
 def insertRep():
 
@@ -50,15 +50,9 @@ def insertSQL(mydb, valor):
         print(datetime.now()) #debug para o timestamp
         tim = datetime.now()
         valor.append('{:%Y-%m-%d %H:%M:%S}'.format(tim))
-        #print(type(valor[1]))
-        #print(valor[5])
-
         
         sql = "INSERT INTO weather_weather (temperature, humidity, wind_speed, wind_direction, solar_intensity, timestamp) VALUES ("+str(valor[0])+", "+str(valor[1])+", "+str(valor[3])+", "+str(valor[4])+", "+str(valor[2])+", %s)"
         val = (valor[5])
-
-        #debug da query
-        #print(sql)
 
         mycursor.execute(sql,val)
         mydb.commit()

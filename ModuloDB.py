@@ -18,8 +18,6 @@ def convertToValue():
     #GUARDAR COMO FICHEIRO .json para fazer a API com isso
     values = json.loads(data) #carrega json como objeto
 
-    #print(type(values)) #debug para saber tipo do json
-
     valor = []
 
     for value in values:
@@ -27,9 +25,6 @@ def convertToValue():
         valor.append(get_num(value['Unnamed: 1']))        
 
     return valor
-      
-
-
 
 #Serve apenas para debug, sendo que todo o codigo sera chamado noutro sitio
 #if __name__ == "__main__":
