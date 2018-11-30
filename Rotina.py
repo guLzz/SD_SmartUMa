@@ -15,9 +15,13 @@ def db_data(sql):
     passwd="",
     database="smartuma"
     )
+    valor = []
+    tim = datetime.now()
+    valor.append('{:%Y-%m-%d %H:%M:%S}'.format(tim))
+    val = (valor[0])
 
     mycursor = mydb.cursor()
-    mycursor.execute(sql)
+    mycursor.execute(sql,val)
     mydb.commit()
 
 #trata pedidos do servidor 
@@ -25,7 +29,7 @@ def listen_request():
     return False
 
 #create thread
-thread = Timer(60, handle_data)
+thread = Timer(10, handle_data)
 thread_listen = Timer(5,listen_request)
 
 thread.start()
