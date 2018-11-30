@@ -2,8 +2,6 @@ import pandas as pd
 import json
 from collections import namedtuple
 import re
-import pymysql.cursors
-from datetime import datetime
 import time
 
 #funcao para retornar apenas floats 
@@ -11,7 +9,7 @@ def get_num(x):
     return float(''.join(ele for ele in x if ele.isdigit() or ele == '.'))
 
 
-def convert_insert():
+def convertToValue():
     
     calls_df, = pd.read_html("http://www.cee.uma.pt/hardlab/wsngroup/wsn/realtimeinfo.php", header=0,attrs = {'width': '230', 'style': 'font-size:small;color:#333333;'}) #acede tabela com atributos especificados no site especificado
 
@@ -28,37 +26,9 @@ def convert_insert():
         print(get_num(value['Unnamed: 1'])) #imprime valor dentro do unnamed1 usando a função get_enum para retirar unidades
         valor.append(get_num(value['Unnamed: 1']))        
 
+    return valor
       
 
-
-    #trata da inserção dos valores na base de dados nas tabelas respetivas
-    mydb = pymysql.connect(
-    host="localhost",
-    user="root",
-    passwd="",
-    database="smartumarep"
-    )
-
-    mycursor = mydb.cursor()
-
-    print(datetime.now()) #debug para o timestamp
-    tim = datetime.now()
-    valor.append('{:%Y-%m-%d %H:%M:%S}'.format(tim))
-    #print(type(valor[1]))
-    #print(valor[5])
-
-    #sql = "INSERT INTO weather_weather (temperature, humidity, radiacao, velocidade_vento, direcao_vento, timestamp) VALUES ("+str(valor[0])+", "+str(valor[1])+", "+str(valor[2])+", "+str(valor[3])+", "+str(valor[4])+", "+str(datetime.datetime.now())+")"
-    sql = "INSERT INTO weather_weather (temperature, humidity, wind_speed, wind_direction, solar_intensity, timestamp) VALUES ("+str(valor[0])+", "+str(valor[1])+", "+str(valor[3])+", "+str(valor[4])+", "+str(valor[2])+", %s)"
-    #sql = "INSERT INTO weather_weather (temperature, humidity, wind_speed, wind_direction, solar_intensity, timestamp) VALUES (%f, %f, %f, %f, %f, %s)"
-    val = (valor[5])
-
-    #debug da query
-    #print(sql)
-
-    mycursor.execute(sql,val)
-    mydb.commit()   
-
-    return sql
 
 
 #Serve apenas para debug, sendo que todo o codigo sera chamado noutro sitio
