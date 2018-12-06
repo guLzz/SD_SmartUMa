@@ -66,6 +66,14 @@ class Weather(models.Model):
 
 
 class StudyRoom(models.Model):
+    studyroom0 = models.ForeignKey('Floor0', on_delete=models.CASCADE, default=-1)
+    studyroom1 = models.ForeignKey('Floor1', on_delete=models.CASCADE, default=-1)
+    studyroom2 = models.ForeignKey('Floor2', on_delete=models.CASCADE, default=-1)
+    studyroom2PC = models.ForeignKey('Floor2PC', on_delete=models.CASCADE, default=-1)
+    studyroom3 = models.ForeignKey('Floor3', on_delete=models.CASCADE, default=-1)
+
+
+class Floor0(models.Model):
     temperature = models.DecimalField(
         decimal_places=1,
         max_digits=3
@@ -75,25 +83,49 @@ class StudyRoom(models.Model):
 
     noise = models.PositiveIntegerField()  # dB
 
-    GROUND = "0"
-    FIRST = " 1"
-    SECOND = " 2"
-    COMPUTER = "2-PC"
-    LIBRARY = "3"
 
-    room_choices = (
-        (GROUND, 'Ground Floor'),
-        (FIRST, '1st Floor'),
-        (SECOND, '2nd Floor'),
-        (COMPUTER, 'Computer Room'),
-        (LIBRARY, 'Library')
-    )
+class Floor1(models.Model):
+    temperature = models.DecimalField(
+        decimal_places=1,
+        max_digits=3
+    )  # ºC
 
-    room = models.CharField(
-        max_length=4,
-        choices=room_choices,
-        default=GROUND
-    )
+    occupation = models.PositiveIntegerField()  # 0 <
+
+    noise = models.PositiveIntegerField()  # dB
+
+
+class Floor2(models.Model):
+    temperature = models.DecimalField(
+        decimal_places=1,
+        max_digits=3
+    )  # ºC
+
+    occupation = models.PositiveIntegerField()  # 0 <
+
+    noise = models.PositiveIntegerField()  # dB
+
+
+class Floor2PC(models.Model):
+    temperature = models.DecimalField(
+        decimal_places=1,
+        max_digits=3
+    )  # ºC
+
+    occupation = models.PositiveIntegerField()  # 0 <
+
+    noise = models.PositiveIntegerField()  # dB
+
+
+class Floor3(models.Model):
+    temperature = models.DecimalField(
+        decimal_places=1,
+        max_digits=3
+    )  # ºC
+
+    occupation = models.PositiveIntegerField()  # 0 <
+
+    noise = models.PositiveIntegerField()  # dB
 
 
 class Parking(models.Model):

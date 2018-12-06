@@ -20,6 +20,7 @@ def index(request):
     network = model_network.objects.latest('timestamp')
 
     context = {
+        'title': 'SmartUMa - Current State',
         'parking': parking,
         'weather': weather,
         'studyroom0': studyroom0,
@@ -27,6 +28,7 @@ def index(request):
         'studyroom2': studyroom2,
         'studyroom2PC': studyroom2_pc,
         'studyroom3': studyroom3,
-        'network': network
+        'network': network,
     }
+
     return render(request, 'currentData/index.html', context)

@@ -1,143 +1,145 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>SmartUMa - Current State</title>
-</head>
-<body>
+{% extends 'currentData/layout.html' %}
+{% block content %}
 
-    <div id="currentWeather">
-        <h3>Weather <a href="/teste">[More]</a></h3>
-        <ul class="dataList">
-            <li>
-                Temperature: {{weather.temperature}} ºC
-            </li>
-            <li>
-                Humidity: {{weather.humidity}} %
-            </li>
-            <li>
-                Wind Speed: {{weather.wind_speed}} m/s
-            </li>
-            <li>
-                Wind Direction: {{weather.wind_direction}}
-            </li>
-            <li>
-                Solar Intensity: {{weather.solar_intensity}} W/m<sup>2</sup>
-            </li>
-            <li>
-                Time: {{weather.timestamp}}
-            </li>
-        </ul>
-    </div>
+<h2>Welcome, {{user.username}}!<br> Checkout the university's current state!</h2>
 
-    <div id="currentParking">
-        <h3>Parking <a href="/teste">[More]</a></h3>
-        <ul class="dataList">
-            <li>
-                Occupation: {{parking.occupation}} / 256
-            </li>
-            <li>
-                Time: {{parking.timestamp}}
-            </li>
-        </ul>
-    </div>
+<div id="currentData">
+    <table>
+        <tr>
+            <th rowspan="5">Weather</th>
+            <td colspan="2">Temperature</td>
+            <td>{{weather.temperature}} ºC</td>
+        </tr>
+        <tr>
+            <td colspan="2">Humidity</td>
+            <td>{{weather.humidity}} %</td>
+        </tr>
+        <tr>
+            <td colspan="2">Wind Speed</td>
+            <td>{{weather.wind_speed}} m/s</td>
+        </tr>
+        <tr>
+            <td colspan="2">Wind Direction</td>
+            <td>{{weather.wind_direction}}</td>
+        </tr>
+        <tr>
+            <td colspan="2">Solar Intensity</td>
+            <td>{{weather.solar_intensity}} W/m<sup>2</sup></td>
+        </tr>
 
-    <div id="currentNetwork">
-        <h3>Network <a href="/teste">[More]</a></h3>
-        <ul class="dataList">
-            <li>
-                Latency: {{network.latency}} ms
-            </li>
-            <li>
-                Download Speed: {{network.download_speed}} Mbps
-            </li>
-            <li>
-                Upload Speed: {{network.upload_speed}} Mbps
-            </li>
-            <li>
-                Time: {{network.timestamp}}
-            </li>
-        </ul>
-    </div>
+        <tr>
+            <td class="break" colspan="4"></td>
+        </tr>
 
-    <div id="currentStudyRoom">
-        <h3>Study Rooms <a href="/teste">[More]</a></h3>
-        <ul class="dataList">
-            <li>
-                Ground Floor:
-                <ul>
-                    <li>
-                        Temperature: {{studyroom0.temperature}} ºC
-                    </li>
-                    <li>
-                        Occupation: {{studyroom0.occupation}} / 30
-                    </li>
-                    <li>
-                        Noise: {{studyroom0.noise}} dB
-                    </li>
-                </ul>
-            </li>
-            <li>
-                1st Floor:
-                <ul>
-                    <li>
-                        Temperature: {{studyroom1.temperature}} ºC
-                    </li>
-                    <li>
-                        Occupation: {{studyroom1.occupation}} / 30
-                    </li>
-                    <li>
-                        Noise: {{studyroom1.noise}} dB
-                    </li>
-                </ul>
-            </li>
-            <li>
-                2nd Floor:
-                <ul>
-                    <li>
-                        Temperature: {{studyroom2.temperature}} ºC
-                    </li>
-                    <li>
-                        Occupation: {{studyroom2.occupation}} / 50
-                    </li>
-                    <li>
-                        Noise: {{studyroom2.noise}} dB
-                    </li>
-                </ul>
-            </li>
-            <li>
-                Computer Room:
-                <ul>
-                    <li>
-                        Temperature: {{studyroom2PC.temperature}} ºC
-                    </li>
-                    <li>
-                        Occupation: {{studyroom2PC.occupation}} / 10
-                    </li>
-                    <li>
-                        Noise: {{studyroom2PC.noise}} dB
-                    </li>
-                </ul>
-            </li>
-            <li>
-                Library:
-                <ul>
-                    <li>
-                        Temperature: {{studyroom3.temperature}} ºC
-                    </li>
-                    <li>
-                        Occupation: {{studyroom3.occupation}} / 60
-                    </li>
-                    <li>
-                        Noise: {{studyroom3.noise}} dB
-                    </li>
-                </ul>
-            </li>
-            <li>
-                Time: {{studyroom3.timestamp}}
-            </li>
-        </ul>
-    </div>
+        <tr>
+            <th rowspan="1">Parking</th>
+            <td colspan="2">Occupation</td>
+            <td>{{parking.occupation}} / 256</td>
+        </tr>
 
-</body>
-</html>
+        <tr>
+            <td class="break" colspan="4"></td>
+        </tr>
+
+        <tr>
+            <th rowspan="3">Network</th>
+            <td colspan="2">Latency</td>
+            <td>{{network.latency}} ms</td>
+        </tr>
+        <tr>
+            <td colspan="2">Download Speed</td>
+            <td>{{network.download_speed}} Mbps</td>
+        </tr>
+        <tr>
+            <td colspan="2">Upload Speed</td>
+            <td>{{network.upload_speed}} Mbps</td>
+        </tr>
+
+        <tr>
+            <td class="break" colspan="4"></td>
+        </tr>
+
+        <tr>
+            <th rowspan="20">Study Rooms</th>
+            <td rowspan="4">Ground Floor</td>
+        </tr>
+        <tr>
+            <td>Temperature</td>
+            <td>{{studyroom0.temperature}} ºC</td>
+        </tr>
+        <tr>
+            <td>Occupation</td>
+            <td>{{studyroom0.occupation}} / 30</td>
+        </tr>
+        <tr>
+            <td>Noise</td>
+            <td>{{studyroom0.noise}} dB</td>
+        </tr>
+
+        <tr>
+            <td rowspan="4">First Floor</td>
+        </tr>
+        <tr>
+            <td>Temperature</td>
+            <td>{{studyroom1.temperature}} ºC</td>
+        </tr>
+        <tr>
+            <td>Occupation</td>
+            <td>{{studyroom1.occupation}} / 30</td>
+        </tr>
+        <tr>
+            <td>Noise</td>
+            <td>{{studyroom1.noise}} dB</td>
+        </tr>
+
+        <tr>
+            <td rowspan="4">Second Floor</td>
+        </tr>
+        <tr>
+            <td>Temperature</td>
+            <td>{{studyroom2.temperature}} ºC</td>
+        </tr>
+        <tr>
+            <td>Occupation</td>
+            <td>{{studyroom2.occupation}} / 30</td>
+        </tr>
+        <tr>
+            <td>Noise</td>
+            <td>{{studyroom2.noise}} dB</td>
+        </tr>
+
+        <tr>
+            <td rowspan="4">Computer Room</td>
+        </tr>
+        <tr>
+            <td>Temperature</td>
+            <td>{{studyroom2PC.temperature}} ºC</td>
+        </tr>
+        <tr>
+            <td>Occupation</td>
+            <td>{{studyroom2PC.occupation}} / 30</td>
+        </tr>
+        <tr>
+            <td>Noise</td>
+            <td>{{studyroom2PC.noise}} dB</td>
+        </tr>
+
+        <tr>
+            <td rowspan="4">Library</td>
+        </tr>
+        <tr>
+            <td>Temperature</td>
+            <td>{{studyroom3.temperature}} ºC</td>
+        </tr>
+        <tr>
+            <td>Occupation</td>
+            <td>{{studyroom3.occupation}} / 30</td>
+        </tr>
+        <tr>
+            <td>Noise</td>
+            <td>{{studyroom3.noise}} dB</td>
+        </tr>
+
+    </table>
+</div>
+{% endblock %}
