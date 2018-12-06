@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <style>
+
+        .break{
+            padding: 1px;
+        }
+
+        .center{
+            margin: auto;
+            width: 100%;
+        }
+
+        #pageTitle{
+            margin:0;
+            padding: 10px;
+            color: white;
+        }
+
+        #logo, table{
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #logo{
+            max-width: 15%;
+            display: block;
+         }
+
+        table{
+            text-align: center;
+            width: 50%;
+        }
+
+        body{
+            margin: 0px;
+        }
+
+        h1, h2{
+            text-align: center;
+        }
+
+        h3{
+            padding-left: 15px;
+        }
+
+        #access{
+            position: relative;
+            top: 200px;
+        }
+
+        header{
+            background-color: #0CA2DD;
+            color: white;
+            width: 100%;
+        }
+
+        #main, #menu{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #main{
+            background-color: #333;
+        }
+
+        #menu{
+            width: 100%;
+            height: 85vh;
+        }
+
+        .option a{
+            display: block;
+            color: white;
+            text-align: center;
+            vertical-align: middle;
+            padding: 14px 16px;
+            text-decoration: none;
+            float: left;
+        }
+
+        .option a:hover{
+            background-color: #0CA2DD;
+        }
+
+        .option2{
+            float: right;
+            width: 25%;
+            line-height: 500px;
+            text-align: center;
+            height: 100%;
+        }
+
+        .option2 a{
+            background-color: #333;
+            padding: 15px;
+            color: white;
+            border: solid 2px white;
+            text-decoration: none;
+        }
+
+        .option2 a:hover{
+            background-color: #0CA2DD;
+        }
+
+        .active{
+            background-color: #7EBDC3;
+        }
+
+        #admin{
+            float: right;
+        }
+
+        table, th, td {
+            border: 1px solid #333;
+            border-collapse: collapse;
+            padding: 10px;
+        }
+
+        th{
+            background-color: #0CA2DD;
+            color: white;
+        }
+
+        caption{
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+    </style>
+</head>
+<body>
+<header>
+    <h1 id="pageTitle">SmartUMa</h1>
+</header>
+<header>
+    <ul id="main">
+        <li class="option">
+            <a href="/">Current State</a>
+        </li>
+        <li class="option">
+            <a href="/history">History</a>
+        </li>
+        <li class="option">
+            <a href="/history/weather">Weather</a>
+        </li>
+        <li class="option">
+            <a href="/history/parking">Parking</a>
+        </li>
+        <li class="option">
+            <a href="/history/network">Network</a>
+        </li>
+        <li class="option">
+            <a href="/history/studyroom">Study Rooms</a>
+        </li>
+        <li id="admin" class="option">
+            <a href="/admin/">
+        {% if user.is_authenticated %}
+            Admin
+        {% else %}
+            Login
+        {% endif %}
+            </a>
+        </li>
+    </ul>
+</header>
+{% if user.is_authenticated %}
+
+{% block content %}
+{% endblock %}
+
+{% else %}
+    <h2 id="access">Access denied! Please, login!</h2>
+{% endif %}
+</body>
+</html>

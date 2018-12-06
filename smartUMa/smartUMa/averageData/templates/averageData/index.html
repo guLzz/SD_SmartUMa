@@ -1,0 +1,32 @@
+{% extends 'currentData/layout.html' %}
+{% block content %}
+<style>
+    #img1{
+        background: no-repeat ;
+        background-image: url("https://s3-eu-west-1.amazonaws.com/iya-news-prod.inyourarea.co.uk/2018/07/thunder_010718.jpg");
+    }
+
+    #img2{
+        background: no-repeat 100%;
+        background-image: url("https://images.wallpaperscraft.com/image/parking_cars_motorcycle_131181_1920x1080.jpg");
+    }
+
+    #img3{
+        background: no-repeat 100% 100%;
+        background-image: url("http://tele-electron.com/wp-content/uploads/2017/04/Servicios-3.jpg");
+    }
+
+    #img4{
+        background: no-repeat 100%;
+        background-image: url("https://amp.businessinsider.com/images/59a03c7d79bbfd1d008b4a6d-750-600.jpg");
+    }
+</style>
+<div class="center">
+    <ul id="menu">
+        <li id="img4" class="option2"><a href="/history/studyroom">Study Rooms</a></li>
+        <li id="img3" class="option2"><a href="/history/network">Network</a></li>
+        <li id="img2" class="option2"><a href="/history/parking">Parking</a></li>
+        <li id="img1" class="option2"><a href="/history/weather">Weather</a></li>
+    </ul>
+</div>
+{% endblock %}

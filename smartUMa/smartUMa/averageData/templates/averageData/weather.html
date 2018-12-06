@@ -1,0 +1,34 @@
+{% extends 'currentData/layout.html' %}
+{% block content %}
+    <h2>Weather History</h2>
+
+    <table>
+        {% for data in weather %}
+        <tr>
+            <th rowspan="5">{{data.timestamp}}</th>
+            <td>Temperature</td>
+            <td>{{data.temperature}} ºC</td>
+        </tr>
+        <tr>
+            <td>Humidity</td>
+            <td>{{data.humidity}} %</td>
+        </tr>
+        <tr>
+            <td>Wind Speed</td>
+            <td>{{data.wind_speed}} m/s</td>
+        </tr>
+        <tr>
+            <td>Wind Direction</td>
+            <td>{{data.wind_direction}}</td>
+        </tr>
+        <tr>
+            <td>Solar Intensity</td>
+            <td>{{data.solar_intensity}} W/m<sup>2</sup></td>
+        </tr>
+
+        <tr>
+            <td class="break" colspan="4"></td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

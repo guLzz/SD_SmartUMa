@@ -1,0 +1,17 @@
+{% extends 'currentData/layout.html' %}
+{% block content %}
+    <h2>Parking History</h2>
+
+    <table>
+        {% for data in parking %}
+        <tr>
+            <th rowspan="1">{{data.timestamp}}</th>
+            <td>Occupation</td>
+            <td>{{data.occupation}} / 256</td>
+        </tr>
+        <tr>
+            <td class="break" colspan="4"></td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

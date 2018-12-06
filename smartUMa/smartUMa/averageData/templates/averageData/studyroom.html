@@ -1,0 +1,84 @@
+{% extends 'currentData/layout.html' %}
+{% block content %}
+    <h2>Study Room History</h2>
+
+    <table>
+        {% for data in studyroom %}
+        <tr>
+            <th rowspan="15">{{data.timestamp}}</th>
+            <td rowspan="3">Ground Floor</td>
+            <td>Temperature</td>
+            <td>{{data.room0.temperature}} ºC</td>
+        </tr>
+        <tr>
+            <td>Occupation</td>
+            <td>{{data.room0.occupation}} / 30</td>
+        </tr>
+        <tr>
+            <td>Noise</td>
+            <td>{{data.room0.noise}} dB</td>
+        </tr>
+
+        <tr>
+            <td rowspan="3">First Floor</td>
+            <td>Temperature</td>
+            <td>{{data.room1.temperature}} ºC</td>
+        </tr>
+        <tr>
+            <td>Occupation</td>
+            <td>{{data.room1.occupation}} / 30</td>
+        </tr>
+        <tr>
+            <td>Noise</td>
+            <td>{{data.room1.noise}} dB</td>
+        </tr>
+
+        <tr>
+            <td rowspan="3">Second Floor</td>
+            <td>Temperature</td>
+            <td>{{data.room2.temperature}} ºC</td>
+        </tr>
+        <tr>
+            <td>Occupation</td>
+            <td>{{data.room2.occupation}} / 30</td>
+        </tr>
+        <tr>
+            <td>Noise</td>
+            <td>{{data.room2.noise}} dB</td>
+        </tr>
+
+        <tr>
+            <td rowspan="3">Computer Room</td>
+            <td>Temperature</td>
+            <td>{{data.room2PC.temperature}} ºC</td>
+        </tr>
+        <tr>
+            <td>Occupation</td>
+            <td>{{data.room2PC.occupation}} / 30</td>
+        </tr>
+        <tr>
+            <td>Noise</td>
+            <td>{{data.room2PC.noise}} dB</td>
+        </tr>
+
+        <tr>
+            <td rowspan="3">Library</td>
+            <td>Temperature</td>
+            <td>{{data.room3.temperature}} ºC</td>
+        </tr>
+        <tr>
+            <td>Occupation</td>
+            <td>{{data.room3.occupation}} / 30</td>
+        </tr>
+        <tr>
+            <td>Noise</td>
+            <td>{{data.room3.noise}} dB</td>
+        </tr>
+
+        <tr>
+            <td class="break" colspan="4"></td>
+        </tr>
+
+        {% endfor %}
+    </table>
+{% endblock %}

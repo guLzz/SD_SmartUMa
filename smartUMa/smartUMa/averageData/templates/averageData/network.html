@@ -1,0 +1,25 @@
+{% extends 'currentData/layout.html' %}
+{% block content %}
+    <h2>Network History</h2>
+
+    <table>
+        {% for data in network %}
+        <tr>
+            <th rowspan="3">{{data.timestamp}}</th>
+            <td>Latency</td>
+            <td>{{data.latency}} ms</td>
+        </tr>
+        <tr>
+            <td>Download Speed</td>
+            <td>{{data.download}} Mbps</td>
+        </tr>
+        <tr>
+            <td>Upload Speed</td>
+            <td>{{data.upload}} Mbps</td>
+        </tr>
+        <tr>
+            <td class="break" colspan="4"></td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
