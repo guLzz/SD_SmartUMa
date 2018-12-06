@@ -21,7 +21,7 @@ def convertToValue():
     valor = []
 
     for value in values:
-        print(get_num(value['Unnamed: 1'])) #imprime valor dentro do unnamed1 usando a função get_enum para retirar unidades
+        #print(get_num(value['Unnamed: 1'])) #imprime valor dentro do unnamed1 usando a função get_enum para retirar unidades
         valor.append(get_num(value['Unnamed: 1']))        
 
     return valor
