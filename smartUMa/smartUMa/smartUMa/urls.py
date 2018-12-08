@@ -15,9 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import url, include
+from api.resources import WeatherResource
+
+weather_resource = WeatherResource()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('currentData.urls')),
-    path('history/', include('averageData.urls'))
+    path('history/', include('averageData.urls')),
+	url(r'^api/', include(weather_resource.urls)),
 ]
