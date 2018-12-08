@@ -10,7 +10,8 @@ from ModuloDB import convertToValue
 def handle_data():   
     #while(True):
         insertRep()
-        #insertServer()
+        insertAPI()
+		#insertServer()
         #time.sleep(60)
 
 def insertRep():
@@ -27,6 +28,34 @@ def insertRep():
 
     insertSQL(mydb, valor)
     
+#trata da base de dados da API (escrita)
+def insertAPI():
+    valor = convertToValue()
+
+    mydb = pymysql.connect(
+    host="localhost",
+    user="root",
+    passwd="",
+    database="smartumarep"
+    )
+    
+    with closing( mydb.cursor() ) as mycursor:
+        mycursor = mydb.cursor()
+
+        print(datetime.now()) #debug para o timestamp
+        tim = datetime.now()
+        valor.append('{:%Y-%m-%d %H:%M:%S}'.format(tim))
+        
+        convert_direction(valor)   
+
+        sql = "INSERT INTO api_weather (temperature, humidity, wind_speed, wind_direction, solar_intensity, timestamp) VALUES ("+str(valor[0])+", "+str(valor[1])+", "+str(valor[3])+", %s, "+str(valor[2])+", %s)"
+        val = (valor[4],valor[5])
+
+        mycursor.execute(sql,val)
+        mydb.commit()
+
+    mydb.close()
+
 
 #trata da base de dados principal (escrita)
 def insertServer():
