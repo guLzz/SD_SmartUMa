@@ -14,7 +14,7 @@ def convertToValue():
     calls_df, = pd.read_html("http://www.cee.uma.pt/hardlab/wsngroup/wsn/realtimeinfo.php", header=0,attrs = {'width': '230', 'style': 'font-size:small;color:#333333;'}) #acede tabela com atributos especificados no site especificado
 
     data = calls_df.to_json(orient="records", date_format="iso") #transforma dados em formato json
-    print(data) #debug
+    #print(data) #debug
     #GUARDAR COMO FICHEIRO .json para fazer a API com isso
     values = json.loads(data) #carrega json como objeto
 

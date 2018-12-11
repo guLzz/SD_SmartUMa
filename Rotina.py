@@ -6,12 +6,12 @@ from contextlib import closing
 from datetime import datetime
 from ModuloDB import convertToValue
 
-#trata dados e envia para a replicacao
+#trata dados
 def handle_data():   
     #while(True):
         insertRep()
         insertAPI()
-		#insertServer()
+        #insertServer()
         #time.sleep(60)
 
 def insertRep():
@@ -36,7 +36,7 @@ def insertAPI():
     host="localhost",
     user="root",
     passwd="",
-    database="smartumarep"
+    database="smartuma"
     )
     
     with closing( mydb.cursor() ) as mycursor:
@@ -48,11 +48,22 @@ def insertAPI():
         
         convert_direction(valor)   
 
-        sql = "INSERT INTO api_weather (temperature, humidity, wind_speed, wind_direction, solar_intensity, timestamp) VALUES ("+str(valor[0])+", "+str(valor[1])+", "+str(valor[3])+", %s, "+str(valor[2])+", %s)"
-        val = (valor[4],valor[5])
+        #query a base de dados para ver se existe valores na tabela da API
+        mycursor.execute("SELECT * FROM api_weather")
+        myresult = mycursor.fetchall()
+        
+        if len(myresult) == 1:
+                sql = "UPDATE api_weather SET temperature = "+str(valor[0])+" , humidity = "+str(valor[1])+", wind_speed = "+str(valor[3])+", wind_direction = %s, solar_intensity = "+str(valor[2])+", timestamp = %s WHERE id = 1"
+                val = (valor[4],valor[5])
 
-        mycursor.execute(sql,val)
-        mydb.commit()
+                mycursor.execute(sql,val)
+                mydb.commit()
+        else:
+                sql = "INSERT INTO api_weather (temperature, humidity, wind_speed, wind_direction, solar_intensity, timestamp) VALUES ("+str(valor[0])+", "+str(valor[1])+", "+str(valor[3])+", %s, "+str(valor[2])+", %s)"
+                val = (valor[4],valor[5])
+
+                mycursor.execute(sql,val)
+                mydb.commit()       
 
     mydb.close()
 
