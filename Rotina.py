@@ -1,5 +1,6 @@
 import time
 import pymysql.cursors
+import socket
 
 from threading import *
 from contextlib import closing
@@ -11,7 +12,7 @@ def handle_data():
     #while(True):
         insertRep()
         insertAPI()
-        #insertServer()
+        insertServer()
         #time.sleep(60)
 
 def insertRep():
@@ -27,7 +28,26 @@ def insertRep():
     )
 
     insertSQL(mydb, valor)
-    
+
+#insert on database
+def insertSQL(mydb, valor):
+    with closing( mydb.cursor() ) as mycursor:
+        mycursor = mydb.cursor()
+
+        print(datetime.now()) #debug para o timestamp
+        tim = datetime.now()
+        valor.append('{:%Y-%m-%d %H:%M:%S}'.format(tim))
+        
+        convert_direction(valor)   
+
+        sql = "INSERT INTO weather_weather (temperature, humidity, wind_speed, wind_direction, solar_intensity, timestamp) VALUES ("+str(valor[0])+", "+str(valor[1])+", "+str(valor[3])+", %s, "+str(valor[2])+", %s)"
+        val = (valor[4],valor[5])
+
+        mycursor.execute(sql,val)
+        mydb.commit()
+
+    mydb.close()
+
 #trata da base de dados da API (escrita)
 def insertAPI():
     valor = convertToValue()
@@ -36,7 +56,7 @@ def insertAPI():
     host="localhost",
     user="root",
     passwd="",
-    database="smartuma"
+    database="smartumarep"
     )
     
     with closing( mydb.cursor() ) as mycursor:
@@ -52,18 +72,23 @@ def insertAPI():
         mycursor.execute("SELECT * FROM api_weather")
         myresult = mycursor.fetchall()
         
-        if len(myresult) == 1:
-                sql = "UPDATE api_weather SET temperature = "+str(valor[0])+" , humidity = "+str(valor[1])+", wind_speed = "+str(valor[3])+", wind_direction = %s, solar_intensity = "+str(valor[2])+", timestamp = %s WHERE id = 1"
-                val = (valor[4],valor[5])
+        if len(myresult) > 0:
+            sql = "UPDATE api_weather SET temperature = "+str(valor[0])+" , humidity = "+str(valor[1])+", wind_speed = "+str(valor[3])+", wind_direction = '"+valor[4]+"', solar_intensity = "+str(valor[2])+", timestamp = %s WHERE id = 1"
+            val = valor[5]
 
-                mycursor.execute(sql,val)
-                mydb.commit()
+            mycursor.execute(sql,val)
+            mydb.commit()
+
+            send_data(sql)
+
         else:
-                sql = "INSERT INTO api_weather (temperature, humidity, wind_speed, wind_direction, solar_intensity, timestamp) VALUES ("+str(valor[0])+", "+str(valor[1])+", "+str(valor[3])+", %s, "+str(valor[2])+", %s)"
-                val = (valor[4],valor[5])
+            sql = "INSERT INTO api_weather (temperature, humidity, wind_speed, wind_direction, solar_intensity, timestamp) VALUES ("+str(valor[0])+", "+str(valor[1])+", "+str(valor[3])+", '"+valor[4]+"', "+str(valor[2])+", %s)"
+            val = valor[5]
+            mycursor.execute(sql,val)
+            mydb.commit() 
 
-                mycursor.execute(sql,val)
-                mydb.commit()       
+            #envia pelo socket
+            send_data(sql)      
 
     mydb.close()
 
@@ -72,15 +97,29 @@ def insertAPI():
 def insertServer():
     valor = convertToValue()
 
-    mydb = pymysql.connect(
-    host="localhost",
-    user="root",
-    passwd="",
-    database="smartuma"
-    )
+    #add time
+    tim = datetime.now()
+    valor.append('{:%Y-%m-%d %H:%M:%S}'.format(tim))
     
-    insertSQL(mydb, valor)
+    #set wind direction
+    convert_direction(valor)
 
+    sql = "INSERT INTO weather_weather (temperature, humidity, wind_speed, wind_direction, solar_intensity, timestamp) VALUES ("+str(valor[0])+", "+str(valor[1])+", "+str(valor[3])+", '"+valor[4]+"', "+str(valor[2])+", %s)"
+    
+    send_data(sql)
+
+def send_data(sql):
+    print(sql)
+    #insert through socket
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    s.connect(('localhost', 50000))
+
+    s.send(str.encode(sql))
+
+    s.close()
+    
+#set wind direction
 def convert_direction(valor):
         if valor[4] > 0.0 and valor[4] < 45.0:
                 valor[4] = 'N'
@@ -107,23 +146,7 @@ def convert_direction(valor):
                 valor[4] = 'NW'  
                 return
 
-def insertSQL(mydb, valor):
-    with closing( mydb.cursor() ) as mycursor:
-        mycursor = mydb.cursor()
 
-        print(datetime.now()) #debug para o timestamp
-        tim = datetime.now()
-        valor.append('{:%Y-%m-%d %H:%M:%S}'.format(tim))
-        
-        convert_direction(valor)   
-
-        sql = "INSERT INTO weather_weather (temperature, humidity, wind_speed, wind_direction, solar_intensity, timestamp) VALUES ("+str(valor[0])+", "+str(valor[1])+", "+str(valor[3])+", %s, "+str(valor[2])+", %s)"
-        val = (valor[4],valor[5])
-
-        mycursor.execute(sql,val)
-        mydb.commit()
-
-    mydb.close()
     
 #trata pedidos do servidor 
 def listen_request():
@@ -131,7 +154,7 @@ def listen_request():
 
 #create thread
 thread = Timer(10, handle_data)
-thread_listen = Timer(5,listen_request)
+#thread_listen = Timer(5,listen_request)
 
 thread.start()
-thread_listen.start()
+#thread_listen.start()
