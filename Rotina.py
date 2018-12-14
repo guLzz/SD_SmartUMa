@@ -9,11 +9,11 @@ from ModuloDB import convertToValue
 
 #trata dados
 def handle_data():   
-    #while(True):
+    while(True):
         insertRep()
         insertAPI()
         insertServer()
-        #time.sleep(60)
+        time.sleep(600)
 
 def insertRep():
 
@@ -73,7 +73,7 @@ def insertAPI():
         myresult = mycursor.fetchall()
         
         if len(myresult) > 0:
-            sql = "UPDATE api_weather SET temperature = "+str(valor[0])+" , humidity = "+str(valor[1])+", wind_speed = "+str(valor[3])+", wind_direction = '"+valor[4]+"', solar_intensity = "+str(valor[2])+", timestamp = %s WHERE id = 1"
+            sql = "UPDATE api_weather SET temperature = "+str(valor[0])+" , humidity = "+str(valor[1])+", wind_speed = "+str(valor[3])+", wind_direction = '"+str(valor[4])+"', solar_intensity = "+str(valor[2])+", timestamp = %s WHERE id = 1"
             val = valor[5]
 
             mycursor.execute(sql,val)
@@ -82,7 +82,7 @@ def insertAPI():
             send_data(sql)
 
         else:
-            sql = "INSERT INTO api_weather (temperature, humidity, wind_speed, wind_direction, solar_intensity, timestamp) VALUES ("+str(valor[0])+", "+str(valor[1])+", "+str(valor[3])+", '"+valor[4]+"', "+str(valor[2])+", %s)"
+            sql = "INSERT INTO api_weather (temperature, humidity, wind_speed, wind_direction, solar_intensity, timestamp) VALUES ("+str(valor[0])+", "+str(valor[1])+", "+str(valor[3])+", '"+str(valor[4])+"', "+str(valor[2])+", %s)"
             val = valor[5]
             mycursor.execute(sql,val)
             mydb.commit() 
@@ -104,7 +104,7 @@ def insertServer():
     #set wind direction
     convert_direction(valor)
 
-    sql = "INSERT INTO weather_weather (temperature, humidity, wind_speed, wind_direction, solar_intensity, timestamp) VALUES ("+str(valor[0])+", "+str(valor[1])+", "+str(valor[3])+", '"+valor[4]+"', "+str(valor[2])+", %s)"
+    sql = "INSERT INTO weather_weather (temperature, humidity, wind_speed, wind_direction, solar_intensity, timestamp) VALUES ("+str(valor[0])+", "+str(valor[1])+", "+str(valor[3])+", '"+str(valor[4])+"', "+str(valor[2])+", %s)"
     
     send_data(sql)
 
@@ -121,28 +121,28 @@ def send_data(sql):
     
 #set wind direction
 def convert_direction(valor):
-        if valor[4] > 0.0 and valor[4] < 45.0:
+        if valor[4] >= 0.0 and valor[4] < 45.0:
                 valor[4] = 'N'
                 return
-        if valor[4] > 45.0 and valor[4] < 90.0:
+        if valor[4] >= 45.0 and valor[4] < 90.0:
                 valor[4] = 'NE'
                 return
-        if valor[4] > 90.0 and valor[4] < 135.0:
+        if valor[4] >= 90.0 and valor[4] < 135.0:
                 valor[4] = 'E'
                 return
-        if valor[4] > 135.0 and valor[4] < 180.0:
+        if valor[4] >= 135.0 and valor[4] < 180.0:
                 valor[4] = 'SE'
                 return
-        if valor[4] > 180.0 and valor[4] < 225.0:
+        if valor[4] >= 180.0 and valor[4] < 225.0:
                 valor[4] = 'S'
                 return
-        if valor[4] > 225.0 and valor[4] < 270.0:
+        if valor[4] >= 225.0 and valor[4] < 270.0:
                 valor[4] = 'SW'
                 return
-        if valor[4] > 270.0 and valor[4] < 315.0:
+        if valor[4] >= 270.0 and valor[4] < 315.0:
                 valor[4] = 'W'   
                 return
-        if valor[4] > 315.0 and valor[4] < 361.0:
+        if valor[4] >= 315.0 and valor[4] < 361.0:
                 valor[4] = 'NW'  
                 return
 
