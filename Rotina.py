@@ -18,6 +18,7 @@ def handle_data():
             time.sleep(600)
         except:
             print("failed")
+            continue
 
 def insertRep():
     try:
@@ -176,6 +177,7 @@ def listen_request():
             time.sleep(600)
         except:
             print("failed")
+            continue
 
 def insertALLAPIs():
     try:
