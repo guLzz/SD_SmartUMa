@@ -28,5 +28,5 @@ def convertToValue():
 
 #Serve apenas para debug, sendo que todo o codigo sera chamado noutro sitio
 #if __name__ == "__main__":
-#    convert_insert()
+
 

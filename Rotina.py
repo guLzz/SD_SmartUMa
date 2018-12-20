@@ -6,6 +6,7 @@ from threading import *
 from contextlib import closing
 from datetime import datetime
 from ModuloDB import convertToValue
+from apis import parkingAPI,netNtempAPI,studyRoomSeatsAPI,noiseAPI
 
 #trata dados
 def handle_data():   
@@ -17,7 +18,7 @@ def handle_data():
 
 def insertRep():
 
-    valor = convertToValue ()
+    valor = convertToValue()
 
     #trata da inserção dos valores na base de dados nas tabelas respetivas
     mydb = pymysql.connect(
@@ -150,11 +151,102 @@ def convert_direction(valor):
     
 #trata pedidos do servidor 
 def listen_request():
-    return False
+    while (True):
+        insertALLAPIs()
+        time.sleep(600)
+
+def insertALLAPIs():
+    try:
+        valor = netNtempAPI()
+        salasocup = studyRoomSeatsAPI()
+        salasnoise = noiseAPI() 
+        parque = parkingAPI()
+        mydb = pymysql.connect(
+        host="localhost",
+        user="root",
+        passwd="",
+        database="smartumarep"
+        )
+        #add time
+        tim = datetime.now()
+        valor.append('{:%Y-%m-%d %H:%M:%S}'.format(tim))
+
+        with closing( mydb.cursor() ) as mycursor:
+            mycursor = mydb.cursor()
+            sql = "INSERT INTO network_network (latency, download_speed, upload_speed, timestamp) VALUES ("+str(valor[0])+", "+str(valor[1])+", "+str(valor[2])+", %s)"
+            val = valor[7]
+            mycursor.execute(sql,val)
+            mydb.commit() 
+
+            #envia pelo socket
+            send_data(sql) 
+            time.sleep(1)
+
+            #PARQUE
+            sql = "INSERT INTO parking_parking (occupation, timestamp) VALUES ("+str(parque)+", %s)"
+            val = valor[7]
+            mycursor.execute(sql,val)
+            mydb.commit() 
+
+            #envia pelo socket
+            send_data(sql)  
+            time.sleep(1)
+
+            ##############################################SALAS########################
+            sql = "INSERT INTO studyroom_studyroom (temperature, occupation, noise, room, timestamp) VALUES ("+str(valor[3])+","+str(salasocup[0])+", "+str(salasnoise[0])+", 0 , %s)"
+            val = valor[7]
+            mycursor.execute(sql,val)
+            mydb.commit() 
+
+            #envia pelo socket
+            send_data(sql)
+            time.sleep(1)
+            
+            sql = "INSERT INTO studyroom_studyroom (temperature, occupation, noise, room, timestamp) VALUES ("+str(valor[4])+","+str(salasocup[1])+", "+str(salasnoise[1])+", 1 , %s)"
+            val = valor[7]
+            mycursor.execute(sql,val)
+            mydb.commit() 
+
+            #envia pelo socket
+            send_data(sql)
+            time.sleep(1)
+
+            sql = "INSERT INTO studyroom_studyroom (temperature, occupation, noise, room, timestamp) VALUES ("+str(valor[5])+","+str(salasocup[2])+", "+str(salasnoise[2])+", 2 , %s)"
+            val = valor[7]
+            mycursor.execute(sql,val)
+            mydb.commit() 
+
+            #envia pelo socket
+            send_data(sql)
+            time.sleep(1)
+
+            sql = "INSERT INTO studyroom_studyroom (temperature, occupation, noise, room, timestamp) VALUES ("+str(valor[5])+","+str(salasocup[2])+", "+str(salasnoise[2])+", '2-PC' , %s)"
+            val = valor[7]
+            mycursor.execute(sql,val)
+            mydb.commit() 
+
+            #envia pelo socket
+            send_data(sql)
+            time.sleep(1)
+
+            sql = "INSERT INTO studyroom_studyroom (temperature, occupation, noise, room, timestamp) VALUES ("+str(valor[6])+","+str(salasocup[3])+", "+str(salasnoise[3])+", 3 , %s)"
+            val = valor[7]
+            mycursor.execute(sql,val)
+            mydb.commit() 
+
+            #envia pelo socket
+            send_data(sql)
+            time.sleep(1)
+
+            ####################################################
+
+        mydb.close()
+    except:
+        print("ta a falhar")
 
 #create thread
 thread = Timer(10, handle_data)
-#thread_listen = Timer(5,listen_request)
+thread_listen = Timer(10,listen_request)
 
 thread.start()
-#thread_listen.start()
+thread_listen.start()
