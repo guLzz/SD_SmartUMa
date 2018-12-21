@@ -126,8 +126,8 @@ def noiseAPI():
         return array
     except:
         print("falhou")
-if __name__ == "__main__":
-    parkingAPI()
-    netNtempAPI()
-    studyRoomSeatsAPI()
-    noiseAPI()
+#if __name__ == "__main__":
+#    parkingAPI()
+#    netNtempAPI()
+#    studyRoomSeatsAPI()
+#    noiseAPI()

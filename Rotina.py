@@ -269,7 +269,7 @@ def insertALLAPIs():
         print("failed")
 
 #create thread
-thread = Timer(10, handle_data)
+thread = Timer(1, handle_data)
 thread_listen = Timer(10,listen_request)
 
 thread.start()
