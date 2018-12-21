@@ -15,6 +15,7 @@ def handle_data():
             insertRep()
             insertAPI()
             insertServer()
+            insertALLAPIs()
             time.sleep(600)
         except:
             print("failed")
@@ -29,7 +30,7 @@ def insertRep():
         host="localhost",
         user="root",
         passwd="",
-        database="smartumarep"
+        database="smartUMarep"
         )
 
         insertSQL(mydb, valor)
@@ -67,7 +68,7 @@ def insertAPI():
         host="localhost",
         user="root",
         passwd="",
-        database="smartumarep"
+        database="smartUMarep"
         )
         
         with closing( mydb.cursor() ) as mycursor:
@@ -168,16 +169,6 @@ def convert_direction(valor):
     except:
         print("failed")
 
-    
-#trata pedidos do servidor 
-def listen_request():
-    while (True):
-        try:
-            insertALLAPIs()
-            time.sleep(600)
-        except:
-            print("failed")
-            continue
 
 def insertALLAPIs():
     try:
@@ -189,7 +180,7 @@ def insertALLAPIs():
         host="localhost",
         user="root",
         passwd="",
-        database="smartumarep"
+        database="smartUMarep"
         )
         #add time
         tim = datetime.now()
@@ -270,7 +261,6 @@ def insertALLAPIs():
 
 #create thread
 thread = Timer(1, handle_data)
-thread_listen = Timer(10,listen_request)
+
 
 thread.start()
-thread_listen.start()

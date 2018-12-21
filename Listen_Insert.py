@@ -29,7 +29,7 @@ while True:
                 host="localhost",
                 user="root",
                 passwd="",
-                database="smartuma"
+                database="smartUMa"
                 )
                 sql = data.decode()
                 tim = datetime.now()
