@@ -31,7 +31,7 @@ def studyRoomSeatsAPI():
         array = [piso0ocupation,piso1ocupation,piso2ocupation,piso3ocupation]
         return array
     except:
-        print("falhou")
+        print("failed: ocupation")
 
 #Devolve numero de carros
 def parkingAPI():
@@ -42,7 +42,7 @@ def parkingAPI():
         #print(nr_cars)
         return nr_cars
     except:
-        print("falhou")
+        print("failed: parking")
 
 #Devolve a latencia (pela API) e 2 randoms floats para uplaod e download
 def netNtempAPI():
@@ -100,7 +100,7 @@ def netNtempAPI():
         array = [latencia,download,upload,temperatura0,temperatura1,temperatura2,temperatura3]
         return array
     except:
-        print("falhou")
+        print("failed: network and temperatures(rooms)")
 
 def noiseAPI():
     try:
@@ -125,7 +125,7 @@ def noiseAPI():
         array = [noise0,noise1,noise2,noise3]
         return array
     except:
-        print("falhou")
+        print("failed: noise (rooms)")
 #if __name__ == "__main__":
 #    parkingAPI()
 #    netNtempAPI()

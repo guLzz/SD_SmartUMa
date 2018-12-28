@@ -15,11 +15,20 @@ def handle_data():
             insertRep()
             insertAPI()
             insertServer()
-            insertALLAPIs()
             time.sleep(600)
         except:
-            print("failed")
+            print("failed: handle_data")
             continue
+
+def handle_api():
+    #while(True):
+    try:
+        insertRoomAPIs()
+        insertParqAPI()
+        time.sleep(600)
+    except:
+        print("failed: apis")
+        #continue
 
 def insertRep():
     try:
@@ -35,7 +44,7 @@ def insertRep():
 
         insertSQL(mydb, valor)
     except:
-        print("failed")
+        print("failed: insert rep")
 
 #insert on database
 def insertSQL(mydb, valor):
@@ -57,7 +66,7 @@ def insertSQL(mydb, valor):
 
         mydb.close()
     except:
-        print("failed")
+        print("failed: insertSQL")
 
 #trata da base de dados da API (escrita)
 def insertAPI():
@@ -104,7 +113,7 @@ def insertAPI():
 
         mydb.close()
     except:
-        print("failed")
+        print("failed: inserting api rep")
 
 #trata da base de dados principal (escrita)
 def insertServer():
@@ -122,7 +131,7 @@ def insertServer():
         
         send_data(sql)
     except:
-        print("failed")
+        print("failed: sending through socket")
 
 
 def send_data(sql):
@@ -137,7 +146,7 @@ def send_data(sql):
 
         s.close()
     except:
-        print("failed")
+        print("failed: sending through socket")
 
 #set wind direction
 def convert_direction(valor):
@@ -167,15 +176,52 @@ def convert_direction(valor):
                 valor[4] = 'NW'  
                 return
     except:
-        print("failed")
+        print("failed : convert into Orientations")
 
-
-def insertALLAPIs():
+#Api net status
+def insertRoomAPIs():
     try:
         valor = netNtempAPI()
         salasocup = studyRoomSeatsAPI()
-        salasnoise = noiseAPI() 
+        salasnoise = noiseAPI()
+
+        sql = "INSERT INTO network_network (latency, download_speed, upload_speed, timestamp) VALUES ("+str(valor[0])+", "+str(valor[1])+", "+str(valor[2])+", %s)"
+        insertExternalAPi(sql)
+
+        ## SALA 0 ##
+        sql = "INSERT INTO studyroom_studyroom (temperature, occupation, noise, room, timestamp) VALUES ("+str(valor[3])+","+str(salasocup[0])+", "+str(salasnoise[0])+", 0 , %s)"
+        insertExternalAPi(sql)
+        
+        ## SALA 1 ##
+        sql = "INSERT INTO studyroom_studyroom (temperature, occupation, noise, room, timestamp) VALUES ("+str(valor[4])+","+str(salasocup[1])+", "+str(salasnoise[1])+", 1 , %s)"
+        insertExternalAPi(sql)
+        
+        ## SALA 2 ##
+        sql = "INSERT INTO studyroom_studyroom (temperature, occupation, noise, room, timestamp) VALUES ("+str(valor[5])+","+str(salasocup[2])+", "+str(salasnoise[2])+", 2 , %s)"
+        insertExternalAPi(sql)
+        
+        ## SALA 2-PC ##
+        sql = "INSERT INTO studyroom_studyroom (temperature, occupation, noise, room, timestamp) VALUES ("+str(valor[5])+","+str(salasocup[2])+", "+str(salasnoise[2])+", '2-PC' , %s)"
+        insertExternalAPi(sql)
+        
+        ## SALA 3 ##
+        sql = "INSERT INTO studyroom_studyroom (temperature, occupation, noise, room, timestamp) VALUES ("+str(valor[6])+","+str(salasocup[3])+", "+str(salasnoise[3])+", 3 , %s)"
+        insertExternalAPi(sql)
+        
+    except:
+        print("failed: room apis")        
+        
+#Api parque        
+def insertParqAPI():
+    try:
         parque = parkingAPI()
+        sql = "INSERT INTO parking_parking (occupation, timestamp) VALUES ("+str(parque)+", %s)"
+        insertExternalAPi(sql)
+    except:
+        print("failed: park ocupation")
+
+def insertExternalAPi(sql):
+    try:
         mydb = pymysql.connect(
         host="localhost",
         user="root",
@@ -184,83 +230,23 @@ def insertALLAPIs():
         )
         #add time
         tim = datetime.now()
-        valor.append('{:%Y-%m-%d %H:%M:%S}'.format(tim))
+        currentTime = ('{:%Y-%m-%d %H:%M:%S}'.format(tim))
 
         with closing( mydb.cursor() ) as mycursor:
             mycursor = mydb.cursor()
-            sql = "INSERT INTO network_network (latency, download_speed, upload_speed, timestamp) VALUES ("+str(valor[0])+", "+str(valor[1])+", "+str(valor[2])+", %s)"
-            val = valor[7]
-            mycursor.execute(sql,val)
-            mydb.commit() 
+            
+            mycursor.execute(sql,currentTime)
+            mydb.commit()
 
             #envia pelo socket
             send_data(sql) 
-            time.sleep(1)
-
-            #PARQUE
-            sql = "INSERT INTO parking_parking (occupation, timestamp) VALUES ("+str(parque)+", %s)"
-            val = valor[7]
-            mycursor.execute(sql,val)
-            mydb.commit() 
-
-            #envia pelo socket
-            send_data(sql)  
-            time.sleep(1)
-
-            ##############################################SALAS########################
-            sql = "INSERT INTO studyroom_studyroom (temperature, occupation, noise, room, timestamp) VALUES ("+str(valor[3])+","+str(salasocup[0])+", "+str(salasnoise[0])+", 0 , %s)"
-            val = valor[7]
-            mycursor.execute(sql,val)
-            mydb.commit() 
-
-            #envia pelo socket
-            send_data(sql)
-            time.sleep(1)
-            
-            sql = "INSERT INTO studyroom_studyroom (temperature, occupation, noise, room, timestamp) VALUES ("+str(valor[4])+","+str(salasocup[1])+", "+str(salasnoise[1])+", 1 , %s)"
-            val = valor[7]
-            mycursor.execute(sql,val)
-            mydb.commit() 
-
-            #envia pelo socket
-            send_data(sql)
-            time.sleep(1)
-
-            sql = "INSERT INTO studyroom_studyroom (temperature, occupation, noise, room, timestamp) VALUES ("+str(valor[5])+","+str(salasocup[2])+", "+str(salasnoise[2])+", 2 , %s)"
-            val = valor[7]
-            mycursor.execute(sql,val)
-            mydb.commit() 
-
-            #envia pelo socket
-            send_data(sql)
-            time.sleep(1)
-
-            sql = "INSERT INTO studyroom_studyroom (temperature, occupation, noise, room, timestamp) VALUES ("+str(valor[5])+","+str(salasocup[2])+", "+str(salasnoise[2])+", '2-PC' , %s)"
-            val = valor[7]
-            mycursor.execute(sql,val)
-            mydb.commit() 
-
-            #envia pelo socket
-            send_data(sql)
-            time.sleep(1)
-
-            sql = "INSERT INTO studyroom_studyroom (temperature, occupation, noise, room, timestamp) VALUES ("+str(valor[6])+","+str(salasocup[3])+", "+str(salasnoise[3])+", 3 , %s)"
-            val = valor[7]
-            mycursor.execute(sql,val)
-            mydb.commit() 
-
-            #envia pelo socket
-            send_data(sql)
-            time.sleep(1)
-
-            ####################################################
-
-        mydb.close()
+            time.sleep(5)
     except:
-        print("failed")
+        print("failed: connect db for ext api")
 
 #create thread
-thread = Timer(1, handle_data)
+#thread = Timer(1, handle_data)
+api_thread = Timer(1, handle_api)
 
-
-thread.start()
+#thread.start()
+api_thread.start()
