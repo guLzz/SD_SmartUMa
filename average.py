@@ -1,7 +1,6 @@
 import time
 import pymysql.cursors
 
-from threading import *
 from contextlib import closing
 from datetime import datetime, timedelta
 
@@ -11,7 +10,7 @@ def getValuesWeather():
             host="localhost",
             user="root",
             passwd="",
-            database="smartuma"
+            database="smartUMa"
             )
 
         with closing( mydb.cursor() ) as mycursor:
@@ -129,7 +128,7 @@ def getValuesParking():
             host="localhost",
             user="root",
             passwd="",
-            database="smartuma"
+            database="smartUMa"
             )
 
         with closing( mydb.cursor() ) as mycursor:
@@ -166,7 +165,7 @@ def getValuesNetwork():
             host="localhost",
             user="root",
             passwd="",
-            database="smartuma"
+            database="smartUMa"
             )
 
         with closing( mydb.cursor() ) as mycursor:
@@ -242,7 +241,7 @@ def getValuesStudyRoom(sala):
             host="localhost",
             user="root",
             passwd="",
-            database="smartuma"
+            database="smartUMa"
             )
 
         with closing( mydb.cursor() ) as mycursor:
