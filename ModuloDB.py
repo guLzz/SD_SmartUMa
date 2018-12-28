@@ -24,9 +24,10 @@ def convertToValue():
             #print(get_num(value['Unnamed: 1'])) #imprime valor dentro do unnamed1 usando a função get_enum para retirar unidades
             valor.append(get_num(value['Unnamed: 1']))        
 
+        valor[3] = (valor[3] * 3600 / 1000)
         return valor
     except:
-        print("falhou")
+        print("failed: convert")
 #Serve apenas para debug, sendo que todo o codigo sera chamado noutro sitio
 #if __name__ == "__main__":
 

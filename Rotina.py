@@ -21,14 +21,14 @@ def handle_data():
             continue
 
 def handle_api():
-    #while(True):
-    try:
-        insertRoomAPIs()
-        insertParqAPI()
-        time.sleep(600)
-    except:
-        print("failed: apis")
-        #continue
+    while(True):
+        try:
+            insertRoomAPIs()
+            insertParqAPI()
+            time.sleep(600)
+        except:
+            print("failed: apis")
+            continue
 
 def insertRep():
     try:
@@ -245,8 +245,8 @@ def insertExternalAPi(sql):
         print("failed: connect db for ext api")
 
 #create thread
-#thread = Timer(1, handle_data)
-api_thread = Timer(1, handle_api)
+thread = Timer(1, handle_data)
+api_thread = Timer(5, handle_api)
 
-#thread.start()
+thread.start()
 api_thread.start()

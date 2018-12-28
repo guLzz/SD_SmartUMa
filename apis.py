@@ -3,6 +3,7 @@ import json
 import random
 import ssl
 
+from datetime import datetime
 from ModuloDB import get_num
 
 #Devolve numero de carros
@@ -51,13 +52,14 @@ def netNtempAPI():
             ping = url.read().decode()
 
         ping_value = json.loads(ping)
-
+        
         #json do ping dos ultimos 7 dias
         arrayping = ping_value['data'][1]['average']
         #print(arrayping) #debug do array 
         
-        for value in arrayping:
-            lag = value
+        lag = max(arrayping)
+        
+        #print(str(ping_value['data'][1]['average'][lag]))
         latencia = abs(int(round(ping_value['data'][1]['average'][lag], 0)))    
         #print(latencia)
 
@@ -69,30 +71,30 @@ def netNtempAPI():
         #temperaturas das salas
         ##############################################################################
         arraytemps0 = ping_value['data'][3]['average']
-        for value in arraytemps0:
-            temp = value
+        
+        temp = max(arraytemps0)
 
         temperatura0 = round(ping_value['data'][3]['average'][temp], 1)
         #print(temperatura0)
 
         #######
         arraytemps1 = ping_value['data'][5]['average']
-        for value in arraytemps1:
-            temp = value
+        
+        temp = max(arraytemps1)
 
         temperatura1 = round(ping_value['data'][5]['average'][temp], 1)
         #print(temperatura1)
         #######
         arraytemps2 = ping_value['data'][9]['average']
-        for value in arraytemps2:
-            temp = value
+        
+        temp = max(arraytemps2)
 
         temperatura2 = round(ping_value['data'][9]['average'][temp], 1)
         #print(temperatura2)
         #######
         arraytemps3 = ping_value['data'][7]['average']
-        for value in arraytemps3:
-            temp = value
+        
+        temp = max(arraytemps3)
 
         temperatura3 = round(ping_value['data'][7]['average'][temp], 1)
         #print(temperatura3)
