@@ -306,9 +306,30 @@ def getValuesStudyRoom(sala):
         return array
 
 
+    except:
+        print("failed: average study room values")
+
+def averageStudyroom(): #precisa de timestamp nas averages 
+    try:
+        mydb = pymysql.connect(
+            host="localhost",
+            user="root",
+            passwd="",
+            database="smartUMa"
+            )
+
+        with closing( mydb.cursor() ) as mycursor:
+            mycursor = mydb.cursor()
+
+            tim = datetime.now()
+            actualTime = ('{:%Y-%m-%d %H:%M:%S}'.format(tim))
+            dayB4 = tim - timedelta(1)
+            dayBefore = ('{:%Y-%m-%d %H:%M:%S}'.format(dayB4))
+
+            
 
     except:
-        print("failed: average study room")
+        print("failed: average study room ids")
 
 #if __name__ == "__main__":
 #    getValuesWeather()
