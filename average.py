@@ -30,7 +30,7 @@ def getValuesWeather():
 
             myresult = mycursor.fetchall()
 
-            print(myresult)
+            #print(myresult)
             #print(len(myresult))
             
             medTemp = 0
@@ -118,8 +118,8 @@ def averageWind(result):
         windD.append(x[0])
 
     windDirection = max(set(windD), key=windD.count)
-    # N>0 NE>1 E>2 SE>3 S>4 SW>5 W>6 NW>7
-    print(windDirection)
+    
+    #print(windDirection)
     return windDirection
 
 def getValuesParking():
@@ -144,7 +144,7 @@ def getValuesParking():
 
             myresult = mycursor.fetchall()
 
-            print(myresult)
+            #print(myresult)
             
             medCars = 0
 
@@ -154,7 +154,7 @@ def getValuesParking():
             medCars = int(round(medCars / len(myresult),0)) 
         
         mydb.close()
-        print(medCars)
+        #print(medCars)
         return medCars
     except:
         print("failed: average parking")
@@ -182,7 +182,7 @@ def getValuesNetwork():
 
             myresult = mycursor.fetchall()
 
-            print(myresult)
+            #print(myresult)
             
             
             medLag = 0
@@ -198,7 +198,7 @@ def getValuesNetwork():
 
             myresult = mycursor.fetchall()
 
-            print(myresult)
+            #print(myresult)
             
             
             medDownload = 0
@@ -214,7 +214,7 @@ def getValuesNetwork():
 
             myresult = mycursor.fetchall()
 
-            print(myresult)
+            #print(myresult)
             
             
             medUpload = 0
@@ -226,9 +226,9 @@ def getValuesNetwork():
             
         
         mydb.close()
-        print(medLag)
-        print(medDownload)
-        print(medUpload)
+        #print(medLag)
+        #print(medDownload)
+        #print(medUpload)
         array = [medLag, medDownload, medUpload]
         return array
     except:
@@ -258,7 +258,7 @@ def getValuesStudyRoom(sala):
 
             myresult = mycursor.fetchall()
 
-            print(myresult)
+            #print(myresult)
             
             medTemp = 0
 
@@ -273,7 +273,7 @@ def getValuesStudyRoom(sala):
 
             myresult = mycursor.fetchall()
 
-            print(myresult)
+            #print(myresult)
             
             medOccupation = 0
 
@@ -288,7 +288,7 @@ def getValuesStudyRoom(sala):
 
             myresult = mycursor.fetchall()
 
-            print(myresult)
+            #print(myresult)
             
             medNoise = 0
 
@@ -299,9 +299,9 @@ def getValuesStudyRoom(sala):
 
 
         mydb.close()
-        print(medTemp)
-        print(medOccupation)
-        print(medNoise)
+        #print(medTemp)
+        #print(medOccupation)
+        #print(medNoise)
         array = [medTemp, medOccupation, medNoise]
         return array
 
@@ -309,7 +309,7 @@ def getValuesStudyRoom(sala):
     except:
         print("failed: average study room values")
 
-def averageStudyroom(): #precisa de timestamp nas averages 
+def averageStudyroomIDs(): 
     try:
         mydb = pymysql.connect(
             host="localhost",
@@ -320,18 +320,134 @@ def averageStudyroom(): #precisa de timestamp nas averages
 
         with closing( mydb.cursor() ) as mycursor:
             mycursor = mydb.cursor()
-
-            tim = datetime.now()
-            actualTime = ('{:%Y-%m-%d %H:%M:%S}'.format(tim))
-            dayB4 = tim - timedelta(1)
-            dayBefore = ('{:%Y-%m-%d %H:%M:%S}'.format(dayB4))
-
             
+            ##floor 0
+            sql = "SELECT id FROM averagedata_floor0"
+            mycursor.execute(sql)
+
+            myresult = mycursor.fetchall()
+            #print(myresult)
+            
+            id_F0 = max(myresult)
+            #print(id_F0[0])
+
+            ##floor 1
+            sql = "SELECT id FROM averagedata_floor1"
+            mycursor.execute(sql)
+
+            myresult = mycursor.fetchall()
+            #print(myresult)
+            
+            id_F1 = max(myresult)
+            #print(id_F1[0])
+            
+            ##floor 2
+            sql = "SELECT id FROM averagedata_floor2"
+            mycursor.execute(sql)
+
+            myresult = mycursor.fetchall()
+            #print(myresult)
+            
+            id_F2 = max(myresult)
+            #print(id_F2[0])
+
+            ##floor 2-PC
+            sql = "SELECT id FROM averagedata_floor2pc"
+            mycursor.execute(sql)
+
+            myresult = mycursor.fetchall()
+            #print(myresult)
+            
+            id_F2PC = max(myresult)
+            #print(id_F2PC[0])
+
+            ##floor 3
+            sql = "SELECT id FROM averagedata_floor3"
+            mycursor.execute(sql)
+
+            myresult = mycursor.fetchall()
+            #print(myresult)
+            
+            id_F3 = max(myresult)
+            #print(id_F3[0])
+
+            average_ids = [id_F0[0], id_F1[0], id_F2[0], id_F2PC[0], id_F3[0]]
+            #print(average_ids)
+
+        mydb.close()
+
+        return average_ids
 
     except:
         print("failed: average study room ids")
 
+def averageDataIDs():
+    try:
+        mydb = pymysql.connect(
+            host="localhost",
+            user="root",
+            passwd="",
+            database="smartuma"
+            )
+
+        with closing( mydb.cursor() ) as mycursor:
+            mycursor = mydb.cursor()
+            
+            ##Network
+            sql = "SELECT id FROM averagedata_network"
+            mycursor.execute(sql)
+
+            myresult = mycursor.fetchall()
+            #print(myresult)
+            
+            id_Network = max(myresult)
+            #print(id_Network[0])
+
+            ##Parking
+            sql = "SELECT id FROM averagedata_parking"
+            mycursor.execute(sql)
+
+            myresult = mycursor.fetchall()
+            #print(myresult)
+            
+            id_Parking = max(myresult)
+            #print(id_Parking[0])
+            
+            ##Studyrooms
+            sql = "SELECT id FROM averagedata_studyroom"
+            mycursor.execute(sql)
+
+            myresult = mycursor.fetchall()
+            #print(myresult)
+            
+            id_Studyroom = max(myresult)
+            #print(id_Studyroom[0])
+
+            ##Weather
+            sql = "SELECT id FROM averagedata_weather"
+            mycursor.execute(sql)
+
+            myresult = mycursor.fetchall()
+            #print(myresult)
+            
+            id_Weather = max(myresult)
+            #print(id_Weather[0])
+
+            average_ids = [id_Network[0], id_Parking[0], id_Studyroom[0], id_Weather[0]]
+            #print(average_ids)
+
+        mydb.close()
+
+        return average_ids
+
+    except:
+        print("failed: average data ids")
+
+
+
 #if __name__ == "__main__":
+#    averageDataIDs()
+#    averageStudyroom()
 #    getValuesWeather()
 #    getValuesParking()    
 #    getValuesNetwork()

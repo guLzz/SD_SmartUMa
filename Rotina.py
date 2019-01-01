@@ -7,10 +7,10 @@ from contextlib import closing
 from datetime import datetime
 from ModuloDB import convertToValue
 from apis import parkingAPI,netNtempAPI,studyRoomSeatsAPI,noiseAPI
-from average import getValuesWeather, getValuesNetwork, getValuesParking, getValuesStudyRoom
+from average import getValuesWeather, getValuesNetwork, getValuesParking, getValuesStudyRoom, averageStudyroomIDs, averageDataIDs
 
 #trata dados
-def handle_data():   
+def handle_data():
     while(True):
         try:
             insertRep()
@@ -143,7 +143,7 @@ def insertServer():
     except:
         print("failed: sending through socket")
 
-
+#socket para inserção de dados proprios
 def send_data(sql):
     try:
         print(sql)
@@ -156,7 +156,37 @@ def send_data(sql):
 
         s.close()
     except:
-        print("failed: sending through socket")
+        print("failed: sending through socket normal insert")
+
+#socket para inserção de dados extenos
+def send_data_api(sql):
+    try:
+        print(sql)
+        #insert through socket
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+        s.connect(('localhost', 50001))
+
+        s.send(str.encode(sql))
+
+        s.close()
+    except:
+        print("failed: sending through socket api insert")
+
+#socket para inserção das médias
+def send_data_average(sql):
+    try:
+        print(sql)
+        #insert through socket
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+        s.connect(('localhost', 50002))
+
+        s.send(str.encode(sql))
+
+        s.close()
+    except:
+        print("failed: sending through socket average insert")
 
 #set wind direction
 def convert_direction(valor):
@@ -249,7 +279,7 @@ def insertExternalAPi(sql):
             mydb.commit()
 
             #envia pelo socket
-            send_data(sql) 
+            send_data_api(sql) 
             time.sleep(5)
     except:
         print("failed: connect db for ext api")
@@ -280,59 +310,75 @@ def insertAverage():
 
             #compara hora atual com 00:00 e 01:00
             if((now > newday and now < oneAM) or now == newday):
-                ##weather
+                ## weather ##
                 sql = "INSERT INTO averagedata_weather (temperature, humidity, wind_speed, wind_direction, solar_intensity) VALUES ("+str(averageWeather[0])+", "+str(averageWeather[1])+", "+str(averageWeather[2])+","+str(averageWeather[3])+","+str(averageWeather[4])+")"
                 mycursor.execute(sql)
                 mydb.commit()
-                send_data(sql)
+                send_data_average(sql)
                 time.sleep(5)
 
-                ##SALAS
+                ## SALAS ##
                 sql = "INSERT INTO averagedata_floor0 (temperature, occupation, noise) VALUES ("+str(averageRoom0[0])+", "+str(averageRoom0[1])+", "+str(averageRoom0[2])+")"
                 mycursor.execute(sql)
                 mydb.commit()
-                send_data(sql)
+                send_data_average(sql)
                 time.sleep(5)
 
                 sql = "INSERT INTO averagedata_floor1 (temperature, occupation, noise) VALUES ("+str(averageRoom1[0])+", "+str(averageRoom1[1])+", "+str(averageRoom1[2])+")" 
                 mycursor.execute(sql)
                 mydb.commit()
-                send_data(sql)
+                send_data_average(sql)
                 time.sleep(5)
 
                 
                 sql = "INSERT INTO averagedata_floor2 (temperature, occupation, noise) VALUES ("+str(averageRoom2[0])+", "+str(averageRoom2[1])+", "+str(averageRoom2[2])+")"
                 mycursor.execute(sql)
                 mydb.commit()
-                send_data(sql)
+                send_data_average(sql)
                 time.sleep(5)
                 
                 
                 sql = "INSERT INTO averagedata_floor2pc (temperature, occupation, noise) VALUES ("+str(averageRoom2[0])+", "+str(averageRoom2[1])+", "+str(averageRoom2[2])+")"
                 mycursor.execute(sql)
                 mydb.commit()
-                send_data(sql)
+                send_data_average(sql)
                 time.sleep(5)
                 
                 
                 sql = "INSERT INTO averagedata_floor3 (temperature, occupation, noise) VALUES ("+str(averageRoom3[0])+", "+str(averageRoom3[1])+", "+str(averageRoom3[2])+")"
                 mycursor.execute(sql)
                 mydb.commit()
-                send_data(sql)
+                send_data_average(sql)
                 time.sleep(5)
                 
                 ## Network ##
                 sql = "INSERT INTO averagedata_network (latency, download_speed, upload_speed) VALUES ("+str(averageNetwork[0])+","+str(averageNetwork[1])+", "+str(averageNetwork[2])+")"
                 mycursor.execute(sql)
                 mydb.commit()
-                send_data(sql)
+                send_data_average(sql)
                 time.sleep(5)
                 
                 ## Parking ##
                 sql = "INSERT INTO averagedata_parking(occupation) VALUES ("+str(averageParking)+")"
                 mycursor.execute(sql)
                 mydb.commit()
-                send_data(sql)
+                send_data_average(sql)
+                time.sleep(5)
+                
+                # inserção de averagedata_studyroom é necessário ser apôs as outras
+                room_ids = averageStudyroomIDs()
+                sql = "INSERT INTO averagedata_studyroom (studyroom0_id, studyroom1_id, studyroom2_id, studyroom2PC_id, studyroom3_id) VALUES ('"+str(room_ids[0])+"', '"+str(room_ids[1])+"', '"+str(room_ids[2])+"', '"+str(room_ids[3])+"', '"+str(room_ids[4])+"')"
+                mycursor.execute(sql)
+                mydb.commit()
+                send_data_average(sql)
+                time.sleep(5)
+
+                # inserção de averagedata_averagedata necessita de ser realisada apôs a actualização da restantes averages
+                data_ids = averageDataIDs()
+                sql = "INSERT INTO averagedata_averagedata (timestamp, network_id, parking_id, studyroom_id, weather_id) VALUES ('%s', '1', '1', '1', '1')"
+                mycursor.execute(sql, now)
+                mydb.commit()
+                send_data_average(sql)
                 time.sleep(5)
 
         mydb.close()
