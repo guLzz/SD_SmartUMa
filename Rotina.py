@@ -304,7 +304,7 @@ def insertAverage():
         with closing( mydb.cursor() ) as mycursor:
             mycursor = mydb.cursor()
 
-            now = datetime.datetime.now()
+            now = datetime.now()
             newday = now.replace(hour=0, minute=0, second=0, microsecond=0)
             oneAM = now.replace(hour=1, minute=0, second=0, microsecond=0)
 
