@@ -9,7 +9,7 @@
     <table>
         {% for data in network %}
         <tr>
-            <th rowspan="3">{{data.timestamp}}</th>
+            <th rowspan="3"><a href="/history/details/network/">{{data.timestamp}}</a></th>
             <td>Latency</td>
             <td>{{data.latency}} ms</td>
         </tr>

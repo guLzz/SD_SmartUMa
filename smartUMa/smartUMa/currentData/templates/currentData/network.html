@@ -1,0 +1,109 @@
+{% extends 'currentData/layout.html' %}
+{% block content %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<h2>Network</h2>
+<!--Temperature-->
+<table id="gauge-list">
+    <tr>
+        <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', {{network.latency}}] <!--valor da base de dados-->
+        ]);
+
+        var options = {
+          height: 120,
+          greenFrom: 0, greenTo: 60,
+          yellowFrom: 60, yellowTo: 150,
+          redFrom: 150, redTo: 300,
+          min: 0,
+          max: 300,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('latency'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+        <td>
+            <h3>Latency(ms)</h3>
+            <div id="latency" class="gauge"></div>
+        </td>
+
+
+        <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', {{network.download_speed}}] <!--valor da base de dados-->
+        ]);
+
+        var options = {
+          height: 120,
+          greenFrom: 10, greenTo: 50,
+          yellowFrom: 0, yellowTo: 10,
+          min: 0,
+          max: 50,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('down'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+        <td>
+            <h3>Download(Mbps)</h3>
+            <div id="down" class="gauge"></div>
+        </td>
+
+
+        <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', {{network.upload_speed}}] <!--valor da base de dados-->
+        ]);
+
+        var options = {
+          height: 120,
+          greenFrom: 10, greenTo: 50,
+          yellowFrom: 0, yellowTo: 10,
+          min: 0,
+          max: 50,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('up'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+        <td>
+            <h3>Upload(Mbps)</h3>
+            <div id="up" class="gauge"></div>
+        </td>
+    </tr>
+</table>
+{% endblock %}

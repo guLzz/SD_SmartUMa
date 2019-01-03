@@ -1,0 +1,164 @@
+{% extends 'currentData/layout.html' %}
+{% block content %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type= "text/javascript">
+    document.getElementById("op3").classList.add("active");
+</script>
+
+<h2>Weather</h2>
+<!--Temperature-->
+<table id="gauge-list">
+    <tr>
+        <td>
+            <script type="text/javascript">
+              google.charts.load('current', {'packages':['corechart']});
+              google.charts.setOnLoadCallback(drawChart);
+
+              function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Day', 'Temperature'],
+                    {% for data in weather %}
+                      [{{data.id}},  {{data.temperature}}],
+                    {% endfor %}
+                ]);
+
+                var options = {
+                  legend: {position: 'none'},
+                  hAxis: {title: 'Day',  titleTextStyle: {color: '#333'}},
+                  vAxis: {minValue: 0}
+                };
+
+                var chart = new google.visualization.AreaChart(document.getElementById('temperature'));
+                chart.draw(data, options);
+              }
+            </script>
+            <h3>Temperature(ºC)</h3>
+            <div id="temperature" class="graph-study"></div>
+        </td>
+        <td>
+            <script type="text/javascript">
+              google.charts.load('current', {'packages':['corechart']});
+              google.charts.setOnLoadCallback(drawChart);
+
+              function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Day', 'Humidity'],
+                    {% for data in weather %}
+                      [{{data.id}},  {{data.humidity}}],
+                    {% endfor %}
+                ]);
+
+                var options = {
+                  legend: {position: 'none'},
+                  hAxis: {title: 'Day',  titleTextStyle: {color: '#333'}},
+                  vAxis: {minValue: 0}
+                };
+
+                var chart = new google.visualization.AreaChart(document.getElementById('humidity'));
+                chart.draw(data, options);
+              }
+            </script>
+            <h3>Humidity(%)</h3>
+            <div id="humidity" class="graph-study"></div>
+        </td>
+        <td>
+            <script type="text/javascript">
+              google.charts.load('current', {'packages':['corechart']});
+              google.charts.setOnLoadCallback(drawChart);
+
+              function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Day', 'Solar Intensity'],
+                    {% for data in weather %}
+                      [{{data.id}},  {{data.solar_intensity}}],
+                    {% endfor %}
+                ]);
+
+                var options = {
+                  legend: {position: 'none'},
+                  hAxis: {title: 'Day',  titleTextStyle: {color: '#333'}},
+                  vAxis: {minValue: 0}
+                };
+
+                var chart = new google.visualization.AreaChart(document.getElementById('solar'));
+                chart.draw(data, options);
+              }
+            </script>
+            <h3>Solar Intensity(W/m<sup>2</sup>)</h3>
+            <div id="solar" class="graph-study"></div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <script type="text/javascript">
+              google.charts.load('current', {'packages':['corechart']});
+              google.charts.setOnLoadCallback(drawChart);
+
+              function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Day', 'Wind Speed'],
+                    {% for data in weather %}
+                      [{{data.id}},  {{data.wind_speed}}],
+                    {% endfor %}
+                ]);
+
+                var options = {
+                  legend: {position: 'none'},
+                  hAxis: {title: 'Day',  titleTextStyle: {color: '#333'}},
+                  vAxis: {minValue: 0}
+                };
+
+                var chart = new google.visualization.AreaChart(document.getElementById('wind_speed'));
+                chart.draw(data, options);
+              }
+            </script>
+            <h3>Wind Speed(km/h)</h3>
+            <div id="wind_speed" class="graph-study"></div>
+        </td>
+        <td>
+            <script type="text/javascript">
+              google.charts.load('current', {'packages':['corechart']});
+              google.charts.setOnLoadCallback(drawChart);
+
+              directions = [];
+                {% for data in weather %}
+                  directions.push('{{data.wind_direction}}');
+                {% endfor %}
+                var counts = [];
+
+                for (var i = 0; i < directions.length; i++) {
+                  var num = directions[i];
+                  counts[num] = counts[num] ? counts[num] + 1 : 1;
+                }
+
+              function drawChart() {
+
+
+                var data = google.visualization.arrayToDataTable([
+                  ['Direction', 'Amount'],
+                  ['N', counts['N']],
+                  ['NE', counts['NE']],
+                  ['E', counts['E']],
+                  ['SE', counts['SE']],
+                  ['S', counts['S']],
+                  ['SW', counts['SW']],
+                  ['W', counts['W']],
+                  ['NW', counts['NW']],
+                ]);
+
+                var options = {
+                  legend: {position: 'top'},
+                  isStacked: true
+                };
+
+                var chart = new google.visualization.SteppedAreaChart(document.getElementById('direction'));
+
+                chart.draw(data, options);
+              }
+            </script>
+            <h3>Wind Direction</h3>
+            <div id="direction" class="graph-study"></div>
+        </td>
+    </tr>
+</table>
+{% endblock %}

@@ -1,0 +1,519 @@
+{% extends 'currentData/layout.html' %}
+{% block content %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<h2>Network</h2>
+<!--Temperature-->
+<table id="gauge-list">
+    <th colspan="3"><h3>Ground Floor</h3></th>
+    <tr>
+        <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', {{studyroom0.temperature}}] <!--valor da base de dados-->
+        ]);
+
+        var options = {
+          height: 120,
+          greenFrom: 20, greenTo: 26,
+          <!--yellowFrom: 10, yellowTo: 20,-->
+          <!--yellowColor: '6fa3f7',-->
+          <!--redFrom: 26, redTo: 40,-->
+          min: 10,
+          max: 40,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('temp0'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+        <td>
+            <h3>Temperature(ºC)</h3>
+            <div id="temp0" class="gauge"></div>
+        </td>
+
+
+        <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', {{studyroom0.noise}}] <!--valor da base de dados-->
+        ]);
+
+        var options = {
+          height: 120,
+          greenFrom: 0, greenTo: 60,
+          yellowFrom: 60, yellowTo: 90,
+          redFrom: 90, redTo: 120,
+          min: 0,
+          max: 120,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('noise0'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+        <td>
+            <h3>Noise(dB)</h3>
+            <div id="noise0" class="gauge"></div>
+        </td>
+
+
+        <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', {{studyroom0.occupation}}] <!--valor da base de dados-->
+        ]);
+
+        var options = {
+          height: 120,
+          min: 0,
+          max: 50,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('occupation0'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+        <td>
+            <h3>Occupation</h3>
+            <div id="occupation0" class="gauge"></div>
+        </td>
+    </tr>
+    <th colspan="3"><h3>First Floor</h3></th>
+    <tr>
+        <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', {{studyroom1.temperature}}] <!--valor da base de dados-->
+        ]);
+
+        var options = {
+          height: 120,
+          greenFrom: 20, greenTo: 26,
+          <!--yellowFrom: 10, yellowTo: 20,-->
+          <!--yellowColor: '6fa3f7',-->
+          <!--redFrom: 26, redTo: 40,-->
+          min: 10,
+          max: 40,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('temp1'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+        <td>
+            <h3>Temperature(ºC)</h3>
+            <div id="temp1" class="gauge"></div>
+        </td>
+
+
+        <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', {{studyroom1.noise}}] <!--valor da base de dados-->
+        ]);
+
+        var options = {
+          height: 120,
+          greenFrom: 0, greenTo: 60,
+          yellowFrom: 60, yellowTo: 90,
+          redFrom: 90, redTo: 120,
+          min: 0,
+          max: 120,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('noise1'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+        <td>
+            <h3>Noise(dB)</h3>
+            <div id="noise1" class="gauge"></div>
+        </td>
+
+
+        <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', {{studyroom1.occupation}}] <!--valor da base de dados-->
+        ]);
+
+        var options = {
+          height: 120,
+          min: 0,
+          max: 50,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('occupation1'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+        <td>
+            <h3>Occupation</h3>
+            <div id="occupation1" class="gauge"></div>
+        </td>
+    </tr>
+
+    <th colspan="3"><h3>Second Floor</h3></th>
+    <tr>
+        <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', {{studyroom2.temperature}}] <!--valor da base de dados-->
+        ]);
+
+        var options = {
+          height: 120,
+          greenFrom: 20, greenTo: 26,
+          <!--yellowFrom: 10, yellowTo: 20,-->
+          <!--yellowColor: '6fa3f7',-->
+          <!--redFrom: 26, redTo: 40,-->
+          min: 10,
+          max: 40,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('temp2'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+        <td>
+            <h3>Temperature(ºC)</h3>
+            <div id="temp2" class="gauge"></div>
+        </td>
+
+
+        <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', {{studyroom2.noise}}] <!--valor da base de dados-->
+        ]);
+
+        var options = {
+          height: 120,
+          greenFrom: 0, greenTo: 60,
+          yellowFrom: 60, yellowTo: 90,
+          redFrom: 90, redTo: 120,
+          min: 0,
+          max: 120,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('noise2'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+        <td>
+            <h3>Noise(dB)</h3>
+            <div id="noise2" class="gauge"></div>
+        </td>
+
+
+        <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', {{studyroom2.occupation}}] <!--valor da base de dados-->
+        ]);
+
+        var options = {
+          height: 120,
+          min: 0,
+          max: 50,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('occupation2'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+        <td>
+            <h3>Occupation</h3>
+            <div id="occupation2" class="gauge"></div>
+        </td>
+    </tr>
+
+    <th colspan="3"><h3>Computer Room</h3></th>
+    <tr>
+        <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', {{studyroom2PC.temperature}}] <!--valor da base de dados-->
+        ]);
+
+        var options = {
+          height: 120,
+          greenFrom: 20, greenTo: 26,
+          <!--yellowFrom: 10, yellowTo: 20,-->
+          <!--yellowColor: '6fa3f7',-->
+          <!--redFrom: 26, redTo: 40,-->
+          min: 10,
+          max: 40,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('temp2PC'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+        <td>
+            <h3>Temperature(ºC)</h3>
+            <div id="temp2PC" class="gauge"></div>
+        </td>
+
+
+        <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', {{studyroom2PC.noise}}] <!--valor da base de dados-->
+        ]);
+
+        var options = {
+          height: 120,
+          greenFrom: 0, greenTo: 60,
+          yellowFrom: 60, yellowTo: 90,
+          redFrom: 90, redTo: 120,
+          min: 0,
+          max: 120,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('noise2PC'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+        <td>
+            <h3>Noise(dB)</h3>
+            <div id="noise2PC" class="gauge"></div>
+        </td>
+
+
+        <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', {{studyroom2PC.occupation}}] <!--valor da base de dados-->
+        ]);
+
+        var options = {
+          height: 120,
+          min: 0,
+          max: 50,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('occupation2PC'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+        <td>
+            <h3>Occupation</h3>
+            <div id="occupation2PC" class="gauge"></div>
+        </td>
+    </tr>
+
+    <th colspan="3"><h3>Library</h3></th>
+    <tr>
+        <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', {{studyroom3.temperature}}] <!--valor da base de dados-->
+        ]);
+
+        var options = {
+          height: 120,
+          greenFrom: 20, greenTo: 26,
+          <!--yellowFrom: 10, yellowTo: 20,-->
+          <!--yellowColor: '6fa3f7',-->
+          <!--redFrom: 26, redTo: 40,-->
+          min: 10,
+          max: 40,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('temp3'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+        <td>
+            <h3>Temperature(ºC)</h3>
+            <div id="temp3" class="gauge"></div>
+        </td>
+
+
+        <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', {{studyroom3.noise}}] <!--valor da base de dados-->
+        ]);
+
+        var options = {
+          height: 120,
+          greenFrom: 0, greenTo: 60,
+          yellowFrom: 60, yellowTo: 90,
+          redFrom: 90, redTo: 120,
+          min: 0,
+          max: 120,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('noise3'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+        <td>
+            <h3>Noise(dB)</h3>
+            <div id="noise3" class="gauge"></div>
+        </td>
+
+
+        <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', {{studyroom3.occupation}}] <!--valor da base de dados-->
+        ]);
+
+        var options = {
+          height: 120,
+          min: 0,
+          max: 50,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('occupation3'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+        <td>
+            <h3>Occupation</h3>
+            <div id="occupation3" class="gauge"></div>
+        </td>
+    </tr>
+
+
+</table>
+{% endblock %}

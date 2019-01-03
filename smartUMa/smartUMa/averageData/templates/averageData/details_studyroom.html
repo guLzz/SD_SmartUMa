@@ -1,0 +1,420 @@
+{% extends 'currentData/layout.html' %}
+{% block content %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type= "text/javascript">
+    document.getElementById("op6").classList.add("active");
+</script>
+
+<!--Temperature-->
+<table id="gauge-list">
+
+    <tr>
+        <td><h2>Ground Floor</h2></td>
+        <td>
+            <script type="text/javascript">
+              google.charts.load('current', {'packages':['corechart']});
+              google.charts.setOnLoadCallback(drawChart);
+
+              function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Day', 'Occupied'],
+                    {% for data in studyroom %}
+                      [{{data.id}},  {{data.room0.temperature}}],
+                    {% endfor %}
+                ]);
+
+                var options = {
+                  legend: {position: 'none'},
+                  hAxis: {title: 'Day',  titleTextStyle: {color: '#333'}},
+                  vAxis: {minValue: 0}
+                };
+
+                var chart = new google.visualization.AreaChart(document.getElementById('temp0'));
+                chart.draw(data, options);
+              }
+            </script>
+            <h3>Temperature</h3>
+            <div id="temp0" class="graph-study"></div>
+        </td>
+        <td>
+            <script type="text/javascript">
+              google.charts.load('current', {'packages':['corechart']});
+              google.charts.setOnLoadCallback(drawChart);
+
+              function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Day', 'Occupied', 'Max'],
+                    {% for data in studyroom %}
+                      [{{data.id}},  {{data.room0.occupation}}, 30],
+                    {% endfor %}
+                ]);
+
+                var options = {
+                  legend: {position: 'none'},
+                  hAxis: {title: 'Day',  titleTextStyle: {color: '#333'}},
+                  vAxis: {minValue: 0}
+                };
+
+                var chart = new google.visualization.AreaChart(document.getElementById('occupation0'));
+                chart.draw(data, options);
+              }
+            </script>
+            <h3>Occupation</h3>
+            <div id="occupation0" class="graph-study" ></div>
+        </td>
+        <td>
+            <script type="text/javascript">
+              google.charts.load('current', {'packages':['corechart']});
+              google.charts.setOnLoadCallback(drawChart);
+
+              function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Day', 'Occupied'],
+                    {% for data in studyroom %}
+                      [{{data.id}},  {{data.room0.noise}}],
+                    {% endfor %}
+                ]);
+
+                var options = {
+                  legend: {position: 'none'},
+                  hAxis: {title: 'Day',  titleTextStyle: {color: '#333'}},
+                  vAxis: {minValue: 0}
+                };
+
+                var chart = new google.visualization.AreaChart(document.getElementById('noise0'));
+                chart.draw(data, options);
+              }
+            </script>
+            <h3>Noise</h3>
+            <div id="noise0" class="graph-study" ></div>
+        </td>
+    </tr>
+    <tr>
+        <td><h2>First Floor</h2></td>
+        <td>
+            <script type="text/javascript">
+              google.charts.load('current', {'packages':['corechart']});
+              google.charts.setOnLoadCallback(drawChart);
+
+              function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Day', 'Occupied'],
+                    {% for data in studyroom %}
+                      [{{data.id}},  {{data.room1.temperature}}],
+                    {% endfor %}
+                ]);
+
+                var options = {
+                  legend: {position: 'none'},
+                  hAxis: {title: 'Day',  titleTextStyle: {color: '#333'}},
+                  vAxis: {minValue: 0}
+                };
+
+                var chart = new google.visualization.AreaChart(document.getElementById('temp1'));
+                chart.draw(data, options);
+              }
+            </script>
+            <h3>Temperature</h3>
+            <div id="temp1" class="graph-study"></div>
+        </td>
+        <td>
+            <script type="text/javascript">
+              google.charts.load('current', {'packages':['corechart']});
+              google.charts.setOnLoadCallback(drawChart);
+
+              function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Day', 'Occupied', 'Max'],
+                    {% for data in studyroom %}
+                      [{{data.id}},  {{data.room1.occupation}}, 30],
+                    {% endfor %}
+                ]);
+
+                var options = {
+                  legend: {position: 'none'},
+                  hAxis: {title: 'Day',  titleTextStyle: {color: '#333'}},
+                  vAxis: {minValue: 0}
+                };
+
+                var chart = new google.visualization.AreaChart(document.getElementById('occupation1'));
+                chart.draw(data, options);
+              }
+            </script>
+            <h3>Occupation</h3>
+            <div id="occupation1" class="graph-study" ></div>
+        </td>
+        <td>
+            <script type="text/javascript">
+              google.charts.load('current', {'packages':['corechart']});
+              google.charts.setOnLoadCallback(drawChart);
+
+              function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Day', 'Occupied'],
+                    {% for data in studyroom %}
+                      [{{data.id}},  {{data.room1.noise}}],
+                    {% endfor %}
+                ]);
+
+                var options = {
+                  legend: {position: 'none'},
+                  hAxis: {title: 'Day',  titleTextStyle: {color: '#333'}},
+                  vAxis: {minValue: 0}
+                };
+
+                var chart = new google.visualization.AreaChart(document.getElementById('noise1'));
+                chart.draw(data, options);
+              }
+            </script>
+            <h3>Noise</h3>
+            <div id="noise1" class="graph-study" ></div>
+        </td>
+    </tr>
+
+    <tr>
+        <td><h2>Second Floor</h2></td>
+        <td>
+            <script type="text/javascript">
+              google.charts.load('current', {'packages':['corechart']});
+              google.charts.setOnLoadCallback(drawChart);
+
+              function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Day', 'Occupied'],
+                    {% for data in studyroom %}
+                      [{{data.id}},  {{data.room2.temperature}}],
+                    {% endfor %}
+                ]);
+
+                var options = {
+                  legend: {position: 'none'},
+                  hAxis: {title: 'Day',  titleTextStyle: {color: '#333'}},
+                  vAxis: {minValue: 0}
+                };
+
+                var chart = new google.visualization.AreaChart(document.getElementById('temp2'));
+                chart.draw(data, options);
+              }
+            </script>
+            <h3>Temperature</h3>
+            <div id="temp2" class="graph-study"></div>
+        </td>
+        <td>
+            <script type="text/javascript">
+              google.charts.load('current', {'packages':['corechart']});
+              google.charts.setOnLoadCallback(drawChart);
+
+              function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Day', 'Occupied', 'Max'],
+                    {% for data in studyroom %}
+                      [{{data.id}},  {{data.room2.occupation}}, 30],
+                    {% endfor %}
+                ]);
+
+                var options = {
+                  legend: {position: 'none'},
+                  hAxis: {title: 'Day',  titleTextStyle: {color: '#333'}},
+                  vAxis: {minValue: 0}
+                };
+
+                var chart = new google.visualization.AreaChart(document.getElementById('occupation2'));
+                chart.draw(data, options);
+              }
+            </script>
+            <h3>Occupation</h3>
+            <div id="occupation2" class="graph-study" ></div>
+        </td>
+        <td>
+            <script type="text/javascript">
+              google.charts.load('current', {'packages':['corechart']});
+              google.charts.setOnLoadCallback(drawChart);
+
+              function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Day', 'Occupied'],
+                    {% for data in studyroom %}
+                      [{{data.id}},  {{data.room2.noise}}],
+                    {% endfor %}
+                ]);
+
+                var options = {
+                  legend: {position: 'none'},
+                  hAxis: {title: 'Day',  titleTextStyle: {color: '#333'}},
+                  vAxis: {minValue: 0}
+                };
+
+                var chart = new google.visualization.AreaChart(document.getElementById('noise2'));
+                chart.draw(data, options);
+              }
+            </script>
+            <h3>Noise</h3>
+            <div id="noise2" class="graph-study" ></div>
+        </td>
+    </tr>
+
+    <tr>
+        <td><h2>Computer Room</h2></td>
+        <td>
+            <script type="text/javascript">
+              google.charts.load('current', {'packages':['corechart']});
+              google.charts.setOnLoadCallback(drawChart);
+
+              function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Day', 'Occupied'],
+                    {% for data in studyroom %}
+                      [{{data.id}},  {{data.room2PC.temperature}}],
+                    {% endfor %}
+                ]);
+
+                var options = {
+                  legend: {position: 'none'},
+                  hAxis: {title: 'Day',  titleTextStyle: {color: '#333'}},
+                  vAxis: {minValue: 0}
+                };
+
+                var chart = new google.visualization.AreaChart(document.getElementById('temp2PC'));
+                chart.draw(data, options);
+              }
+            </script>
+            <h3>Temperature</h3>
+            <div id="temp2PC" class="graph-study"></div>
+        </td>
+        <td>
+            <script type="text/javascript">
+              google.charts.load('current', {'packages':['corechart']});
+              google.charts.setOnLoadCallback(drawChart);
+
+              function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Day', 'Occupied', 'Max'],
+                    {% for data in studyroom %}
+                      [{{data.id}},  {{data.room2PC.occupation}}, 30],
+                    {% endfor %}
+                ]);
+
+                var options = {
+                  legend: {position: 'none'},
+                  hAxis: {title: 'Day',  titleTextStyle: {color: '#333'}},
+                  vAxis: {minValue: 0}
+                };
+
+                var chart = new google.visualization.AreaChart(document.getElementById('occupation2PC'));
+                chart.draw(data, options);
+              }
+            </script>
+            <h3>Occupation</h3>
+            <div id="occupation2PC" class="graph-study" ></div>
+        </td>
+        <td>
+            <script type="text/javascript">
+              google.charts.load('current', {'packages':['corechart']});
+              google.charts.setOnLoadCallback(drawChart);
+
+              function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Day', 'Occupied'],
+                    {% for data in studyroom %}
+                      [{{data.id}},  {{data.room2PC.noise}}],
+                    {% endfor %}
+                ]);
+
+                var options = {
+                  legend: {position: 'none'},
+                  hAxis: {title: 'Day',  titleTextStyle: {color: '#333'}},
+                  vAxis: {minValue: 0}
+                };
+
+                var chart = new google.visualization.AreaChart(document.getElementById('noise2PC'));
+                chart.draw(data, options);
+              }
+            </script>
+            <h3>Noise</h3>
+            <div id="noise2PC" class="graph-study" ></div>
+        </td>
+    </tr>
+
+    <tr>
+        <td><h2>Library</h2></td>
+        <td>
+            <script type="text/javascript">
+              google.charts.load('current', {'packages':['corechart']});
+              google.charts.setOnLoadCallback(drawChart);
+
+              function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Day', 'Occupied'],
+                    {% for data in studyroom %}
+                      [{{data.id}},  {{data.room3.temperature}}],
+                    {% endfor %}
+                ]);
+
+                var options = {
+                  legend: {position: 'none'},
+                  hAxis: {title: 'Day',  titleTextStyle: {color: '#333'}},
+                  vAxis: {minValue: 0}
+                };
+
+                var chart = new google.visualization.AreaChart(document.getElementById('temp3'));
+                chart.draw(data, options);
+              }
+            </script>
+            <h3>Temperature</h3>
+            <div id="temp3" class="graph-study"></div>
+        </td>
+        <td>
+            <script type="text/javascript">
+              google.charts.load('current', {'packages':['corechart']});
+              google.charts.setOnLoadCallback(drawChart);
+
+              function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Day', 'Occupied', 'Max'],
+                    {% for data in studyroom %}
+                      [{{data.id}},  {{data.room3.occupation}}, 30],
+                    {% endfor %}
+                ]);
+
+                var options = {
+                  legend: {position: 'none'},
+                  hAxis: {title: 'Day',  titleTextStyle: {color: '#333'}},
+                  vAxis: {minValue: 0}
+                };
+
+                var chart = new google.visualization.AreaChart(document.getElementById('occupation3'));
+                chart.draw(data, options);
+              }
+            </script>
+            <h3>Occupation</h3>
+            <div id="occupation3" class="graph-study" ></div>
+        </td>
+        <td>
+            <script type="text/javascript">
+              google.charts.load('current', {'packages':['corechart']});
+              google.charts.setOnLoadCallback(drawChart);
+
+              function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Day', 'Occupied'],
+                    {% for data in studyroom %}
+                      [{{data.id}},  {{data.room3.noise}}],
+                    {% endfor %}
+                ]);
+
+                var options = {
+                  legend: {position: 'none'},
+                  hAxis: {title: 'Day',  titleTextStyle: {color: '#333'}},
+                  vAxis: {minValue: 0}
+                };
+
+                var chart = new google.visualization.AreaChart(document.getElementById('noise3'));
+                chart.draw(data, options);
+              }
+            </script>
+            <h3>Noise</h3>
+            <div id="noise3" class="graph-study" ></div>
+        </td>
+    </tr>
+</table>
+{% endblock %}
