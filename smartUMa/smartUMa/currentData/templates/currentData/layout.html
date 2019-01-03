@@ -122,9 +122,53 @@
             padding: 10px;
         }
 
+        #gauge-list td, #gauge-list{
+            border: none;
+        }
+
+        .gauge{
+            width: 120px;
+            height: 120px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0px 40px 0px 40px;
+
+        }
+
+        .graph{
+            width: 500px;
+            height: 500px;
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+
+        .graph-study{
+            width: 300px;
+            height: 300px;
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+
+        #gauge-list th{
+            color: black;
+            background-color: white;
+            border: none;
+            border-bottom: 1px black solid;
+        }
+
         th{
             background-color: #0CA2DD;
             color: white;
+        }
+
+        th a{
+            color: white;
+        }
+
+        th a:hover{
+            color: #333;
         }
 
         caption{
@@ -142,9 +186,6 @@
     <ul id="main">
         <li class="option">
             <a id = "op1" href="/">Current State</a>
-        </li>
-        <li class="option">
-            <a  id = "op2"  href="/history">History</a>
         </li>
         <li class="option">
             <a id = "op3" href="/history/weather">Weather</a>

@@ -1,0 +1,35 @@
+{% extends 'currentData/layout.html' %}
+{% block content %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<h2>Parking</h2>
+<!--Temperature-->
+<table id="gauge-list">
+    <tr>
+        <td>
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script type="text/javascript">
+                  google.charts.load("current", {packages:["corechart"]});
+                  google.charts.setOnLoadCallback(drawChart);
+                  function drawChart() {
+                    var data = google.visualization.arrayToDataTable([
+                      ['State', 'Number'],
+                      ['Free', 256 - {{parking.occupation}}],
+                      ['Occupied', {{parking.occupation}}],
+                    ]);
+
+                    var options = {
+                        legend: 'bottom',
+                        pieSliceText: 'value',
+                        is3D: true
+                    };
+
+                    var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+                    chart.draw(data, options);
+                  }
+            </script>
+            <div id="donutchart" class="gauge" style="width: 900px; height: 400px;"></div>
+        </td>
+    </tr>
+</table>
+{% endblock %}

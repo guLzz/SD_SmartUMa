@@ -1,0 +1,66 @@
+{% extends 'currentData/layout.html' %}
+{% block content %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type= "text/javascript">
+    document.getElementById("op5").classList.add("active");
+</script>
+
+<h2>Network</h2>
+<!--Temperature-->
+<table id="gauge-list">
+    <tr>
+        <td>
+            <script type="text/javascript">
+              google.charts.load('current', {'packages':['corechart']});
+              google.charts.setOnLoadCallback(drawChart);
+
+              function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Day', 'Latency'],
+                    {% for data in network %}
+                      [{{data.id}},  {{data.latency}}],
+                    {% endfor %}
+                ]);
+
+                var options = {
+                  legend: {position: 'none'},
+                  hAxis: {title: 'Day',  titleTextStyle: {color: '#333'}},
+                  vAxis: {minValue: 0}
+                };
+
+                var chart = new google.visualization.AreaChart(document.getElementById('latency'));
+                chart.draw(data, options);
+              }
+            </script>
+            <h3>Latency(ms)</h3>
+            <div id="latency" class="graph"></div>
+        </td>
+        <td>
+            <script type="text/javascript">
+              google.charts.load('current', {'packages':['corechart']});
+              google.charts.setOnLoadCallback(drawChart);
+
+              function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Day', 'Download Speed', 'Upload Speed'],
+                    {% for data in network %}
+                      [{{data.id}},  {{data.download}}, {{data.upload}}],
+                    {% endfor %}
+                ]);
+
+                var options = {
+                  legend: {position: 'top'},
+                  hAxis: {title: 'Day',  titleTextStyle: {color: '#333'}},
+                  vAxis: {minValue: 0}
+                };
+
+                var chart = new google.visualization.AreaChart(document.getElementById('download'));
+                chart.draw(data, options);
+              }
+            </script>
+            <h3>Download/Upload(Mbps)</h3>
+            <div id="download" class="graph"></div>
+        </td>
+    </tr>
+</table>
+{% endblock %}

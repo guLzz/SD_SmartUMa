@@ -9,7 +9,7 @@
     <table>
         {% for data in weather %}
         <tr>
-            <th rowspan="5">{{data.timestamp}}</th>
+            <th rowspan="5"><a href="/history/details/weather/">{{data.timestamp}}</a></th>
             <td>Temperature</td>
             <td>{{data.temperature}} ºC</td>
         </tr>
@@ -19,7 +19,7 @@
         </tr>
         <tr>
             <td>Wind Speed</td>
-            <td>{{data.wind_speed}} m/s</td>
+            <td>{{data.wind_speed}} km/h</td>
         </tr>
         <tr>
             <td>Wind Direction</td>

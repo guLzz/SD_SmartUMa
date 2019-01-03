@@ -1,0 +1,146 @@
+{% extends 'currentData/layout.html' %}
+{% block content %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<h2>Weather</h2>
+<!--Temperature-->
+<table id="gauge-list">
+    <tr>
+        <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', {{weather.temperature}}] <!--valor da base de dados-->
+        ]);
+
+        var options = {
+          height: 120,
+          greenFrom: 20, greenTo: 26,
+          <!--yellowFrom: 10, yellowTo: 20,-->
+          <!--yellowColor: '6fa3f7',-->
+          <!--redFrom: 26, redTo: 40,-->
+          min: 10,
+          max: 40,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('temp'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+        <td>
+            <h3>Temperature(ºC)</h3>
+            <div id="temp" class="gauge"></div>
+        </td>
+
+        <!--Humidity-->
+        <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', {{weather.humidity}}] <!--valor da base de dados-->
+        ]);
+
+        var options = {
+          height: 120,
+          greenFrom: 30, greenTo: 50,
+          <!--yellowFrom: 10, yellowTo: 20,-->
+          <!--yellowColor: '6fa3f7',-->
+          <!--redFrom: 26, redTo: 40,-->
+          min: 0,
+          max: 100,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('hum'));
+
+        chart.draw(data, options);
+      }
+    </script>
+        <td>
+            <h3>Humidity(%)</h3>
+            <div id="hum" class="gauge"></div>
+        </td>
+
+        <!--Solar intensity-->
+        <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', {{weather.solar_intensity}}] <!--valor da base de dados-->
+        ]);
+
+        var options = {
+          height: 120,
+          min: 0,
+          max: 1500,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('solar'));
+
+        chart.draw(data, options);
+      }
+    </script>
+        <td>
+            <h3>Solar Intensity(W/m<sup>2</sup>)</h3>
+            <div id="solar" class="gauge"></div>
+        </td>
+        <!--Wind speed-->
+        <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', {{weather.wind_speed}}] <!--valor da base de dados-->
+        ]);
+
+        var options = {
+          height: 120,
+          greenFrom: 0, greenTo: 20,
+          yellowFrom: 20, yellowTo: 50,
+          redFrom: 50, redTo: 116,
+          min: 0,
+          max: 116,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('speed'));
+
+        chart.draw(data, options);
+      }
+    </script>
+        <td>
+            <h3>Wind Speed(km/h)</h3>
+            <div id="speed" class="gauge"></div>
+        </td>
+
+        <td>
+            <h3>Wind Direction</h3>
+            <div class="gauge"><p style="font-size:120px; color: #333; margin: 0px;">{{weather.wind_direction}}</p></div>
+        </td>
+
+
+    </tr>
+</table>
+{% endblock %}

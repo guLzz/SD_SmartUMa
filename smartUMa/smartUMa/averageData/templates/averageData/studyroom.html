@@ -10,7 +10,7 @@
     <table>
         {% for data in studyroom %}
         <tr>
-            <th rowspan="15">{{data.timestamp}}</th>
+            <th rowspan="15"><a href="/history/details/studyroom/">{{data.timestamp}}</a></th>
             <td rowspan="3">Ground Floor</td>
             <td>Temperature</td>
             <td>{{data.room0.temperature}} ºC</td>
