@@ -119,7 +119,7 @@ def averageWind(result):
 
     windDirection = max(set(windD), key=windD.count)
     
-    #print(windDirection)
+    #print(windDirection) #
     return windDirection
 
 def getValuesParking():

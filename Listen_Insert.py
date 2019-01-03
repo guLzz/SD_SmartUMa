@@ -6,7 +6,7 @@ from threading import *
 from contextlib import closing
 from datetime import datetime
 
-HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
+HOST = '127.0.0.1'  # Standard loopback interface address (localhost)#
 WEATHER_PORT = 50000        # Port to listen on (non-privileged ports are > 1023)
 API_PORT = 50001
 AVERAGE_PORT = 50002

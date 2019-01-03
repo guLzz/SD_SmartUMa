@@ -304,11 +304,11 @@ def insertAverage():
         with closing( mydb.cursor() ) as mycursor:
             mycursor = mydb.cursor()
 
-            now = datetime.now()
+            now = datetime.now() 
             newday = now.replace(hour=0, minute=0, second=0, microsecond=0)
             oneAM = now.replace(hour=1, minute=0, second=0, microsecond=0)
 
-            #compara hora atual com 00:00 e 01:00
+            #compara hora atual com 00:00 e 01
             if((now > newday and now < oneAM) or now == newday):
                 ## weather ##
                 sql = "INSERT INTO averagedata_weather (temperature, humidity, wind_speed, wind_direction, solar_intensity) VALUES ("+str(averageWeather[0])+", "+str(averageWeather[1])+", "+str(averageWeather[2])+","+str(averageWeather[3])+","+str(averageWeather[4])+")"

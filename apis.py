@@ -45,7 +45,7 @@ def parkingAPI():
     except:
         print("failed: parking")
 
-#Devolve a latencia (pela API) e 2 randoms floats para uplaod e download
+#Devolve a latencia (pela API) e 2 randoms floats para uplaod e download#
 def netNtempAPI():
     try:
         with urllib.request.urlopen("https://jpborges.pt/smartuma/api/sensors") as url:

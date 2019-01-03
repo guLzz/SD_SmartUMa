@@ -28,7 +28,7 @@ def convertToValue():
         return valor
     except:
         print("failed: convert")
-#Serve apenas para debug, sendo que todo o codigo sera chamado noutro sitio
+#Serve apenas para debug, sendo que todo o codigo sera chamado noutro sitio#
 #if __name__ == "__main__":
 
 
