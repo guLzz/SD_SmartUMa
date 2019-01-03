@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9154a60b-bc3a-412d-a497-11ca97c40b58" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartUMa/averageData/templates/averageData/network.html" beforeDir="false" afterPath="$PROJECT_DIR$/smartUMa/averageData/templates/averageData/network.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartUMa/averageData/templates/averageData/parking.html" beforeDir="false" afterPath="$PROJECT_DIR$/smartUMa/averageData/templates/averageData/parking.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartUMa/averageData/templates/averageData/studyroom.html" beforeDir="false" afterPath="$PROJECT_DIR$/smartUMa/averageData/templates/averageData/studyroom.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartUMa/averageData/templates/averageData/weather.html" beforeDir="false" afterPath="$PROJECT_DIR$/smartUMa/averageData/templates/averageData/weather.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartUMa/averageData/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/smartUMa/averageData/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartUMa/averageData/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/smartUMa/averageData/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartUMa/currentData/templates/currentData/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/smartUMa/currentData/templates/currentData/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartUMa/currentData/templates/currentData/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/smartUMa/currentData/templates/currentData/layout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartUMa/currentData/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/smartUMa/currentData/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartUMa/currentData/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/smartUMa/currentData/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartUMa/smartUMa/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/smartUMa/smartUMa/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smartUMa/currentData/templates/currentData/studyroom.html" beforeDir="false" afterPath="$PROJECT_DIR$/smartUMa/currentData/templates/currentData/studyroom.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -93,25 +82,25 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="5160" />
+          <entry key="html" value="5171" />
           <entry key="py" value="2878" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="5160" />
+          <entry key="HTML" value="5171" />
           <entry key="Python" value="2878" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="html" value="47" />
+          <entry key="html" value="51" />
           <entry key="py" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="47" />
+          <entry key="HTML" value="51" />
           <entry key="Python" value="12" />
         </counts>
       </usages-collector>
@@ -146,11 +135,47 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/smartUMa/averageData/templates/averageData/details_parking.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
               <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/smartUMa/averageData/templates/averageData/studyroom.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/smartUMa/averageData/templates/averageData/details_studyroom.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/smartUMa/currentData/templates/currentData/network.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="46">
+              <caret line="92" column="18" selection-start-line="92" selection-start-column="18" selection-end-line="92" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/smartUMa/currentData/templates/currentData/studyroom.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -194,7 +219,6 @@
         <option value="$PROJECT_DIR$/smartUMa/currentData/templates/currentData/weather.html" />
         <option value="$PROJECT_DIR$/smartUMa/currentData/templates/currentData/network.html" />
         <option value="$PROJECT_DIR$/smartUMa/currentData/views.py" />
-        <option value="$PROJECT_DIR$/smartUMa/currentData/templates/currentData/studyroom.html" />
         <option value="$PROJECT_DIR$/smartUMa/currentData/urls.py" />
         <option value="$PROJECT_DIR$/smartUMa/currentData/templates/currentData/parking.html" />
         <option value="$PROJECT_DIR$/smartUMa/averageData/urls.py" />
@@ -209,6 +233,7 @@
         <option value="$PROJECT_DIR$/smartUMa/averageData/templates/averageData/details_network.html" />
         <option value="$PROJECT_DIR$/smartUMa/averageData/templates/averageData/details_studyroom.html" />
         <option value="$PROJECT_DIR$/smartUMa/averageData/templates/averageData/details_parking.html" />
+        <option value="$PROJECT_DIR$/smartUMa/currentData/templates/currentData/studyroom.html" />
       </list>
     </option>
   </component>
@@ -248,16 +273,22 @@
               <item name="smartUMa" type="b2602c69:ProjectViewProjectNode" />
               <item name="smartUMa" type="462c0819:PsiDirectoryNode" />
               <item name="smartUMa" type="462c0819:PsiDirectoryNode" />
-              <item name="averageData" type="462c0819:PsiDirectoryNode" />
+              <item name="currentData" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="smartUMa" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smartUMa" type="462c0819:PsiDirectoryNode" />
+              <item name="smartUMa" type="462c0819:PsiDirectoryNode" />
+              <item name="currentData" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="smartUMa" type="b2602c69:ProjectViewProjectNode" />
               <item name="smartUMa" type="462c0819:PsiDirectoryNode" />
               <item name="smartUMa" type="462c0819:PsiDirectoryNode" />
-              <item name="averageData" type="462c0819:PsiDirectoryNode" />
+              <item name="currentData" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="averageData" type="462c0819:PsiDirectoryNode" />
+              <item name="currentData" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -538,13 +569,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/smartUMa/currentData/templates/currentData/studyroom.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="210" column="36" selection-start-line="210" selection-start-column="36" selection-end-line="210" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/smartUMa/currentData/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="358">
@@ -563,13 +587,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="8" column="72" selection-start-line="8" selection-start-column="72" selection-end-line="8" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/smartUMa/currentData/templates/currentData/network.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="92" column="18" selection-start-line="92" selection-start-column="18" selection-end-line="92" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -629,20 +646,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/smartUMa/averageData/templates/averageData/details_studyroom.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/smartUMa/averageData/templates/averageData/studyroom.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="5" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/smartUMa/averageData/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -661,6 +664,34 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smartUMa/averageData/templates/averageData/studyroom.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smartUMa/averageData/templates/averageData/details_studyroom.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smartUMa/currentData/templates/currentData/network.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="92" column="18" selection-start-line="92" selection-start-column="18" selection-end-line="92" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smartUMa/currentData/templates/currentData/studyroom.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
         </state>
       </provider>
     </entry>
