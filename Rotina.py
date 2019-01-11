@@ -293,6 +293,7 @@ def insertAverage():
         averageRoom1 = getValuesStudyRoom("1") 
         averageRoom2 = getValuesStudyRoom("2") 
         averageRoom3 = getValuesStudyRoom("3") 
+        
 
         mydb = pymysql.connect(
         host="localhost",
@@ -311,55 +312,55 @@ def insertAverage():
             #compara hora atual com 00:00 e 01
             if((now > newday and now < oneAM) or now == newday):
                 ## weather ##
-                sql = "INSERT INTO averagedata_weather (temperature, humidity, wind_speed, wind_direction, solar_intensity) VALUES ("+str(averageWeather[0])+", "+str(averageWeather[1])+", "+str(averageWeather[2])+","+str(averageWeather[3])+","+str(averageWeather[4])+")"
+                sql = "INSERT INTO averageData_weather (temperature, humidity, wind_speed, wind_direction, solar_intensity) VALUES ("+str(averageWeather[0])+", "+str(averageWeather[1])+", "+str(averageWeather[2])+","+str(averageWeather[3])+","+str(averageWeather[4])+")"
                 mycursor.execute(sql)
                 mydb.commit()
                 send_data_average(sql)
                 time.sleep(5)
 
                 ## SALAS ##
-                sql = "INSERT INTO averagedata_floor0 (temperature, occupation, noise) VALUES ("+str(averageRoom0[0])+", "+str(averageRoom0[1])+", "+str(averageRoom0[2])+")"
+                sql = "INSERT INTO averageData_floor0 (temperature, occupation, noise) VALUES ("+str(averageRoom0[0])+", "+str(averageRoom0[1])+", "+str(averageRoom0[2])+")"
                 mycursor.execute(sql)
                 mydb.commit()
                 send_data_average(sql)
                 time.sleep(5)
 
-                sql = "INSERT INTO averagedata_floor1 (temperature, occupation, noise) VALUES ("+str(averageRoom1[0])+", "+str(averageRoom1[1])+", "+str(averageRoom1[2])+")" 
+                sql = "INSERT INTO averageData_floor1 (temperature, occupation, noise) VALUES ("+str(averageRoom1[0])+", "+str(averageRoom1[1])+", "+str(averageRoom1[2])+")" 
                 mycursor.execute(sql)
                 mydb.commit()
                 send_data_average(sql)
                 time.sleep(5)
 
                 
-                sql = "INSERT INTO averagedata_floor2 (temperature, occupation, noise) VALUES ("+str(averageRoom2[0])+", "+str(averageRoom2[1])+", "+str(averageRoom2[2])+")"
+                sql = "INSERT INTO averageData_floor2 (temperature, occupation, noise) VALUES ("+str(averageRoom2[0])+", "+str(averageRoom2[1])+", "+str(averageRoom2[2])+")"
                 mycursor.execute(sql)
                 mydb.commit()
                 send_data_average(sql)
                 time.sleep(5)
                 
                 
-                sql = "INSERT INTO averagedata_floor2pc (temperature, occupation, noise) VALUES ("+str(averageRoom2[0])+", "+str(averageRoom2[1])+", "+str(averageRoom2[2])+")"
+                sql = "INSERT INTO averageData_floor2pc (temperature, occupation, noise) VALUES ("+str(averageRoom2[0])+", "+str(averageRoom2[1])+", "+str(averageRoom2[2])+")"
                 mycursor.execute(sql)
                 mydb.commit()
                 send_data_average(sql)
                 time.sleep(5)
                 
                 
-                sql = "INSERT INTO averagedata_floor3 (temperature, occupation, noise) VALUES ("+str(averageRoom3[0])+", "+str(averageRoom3[1])+", "+str(averageRoom3[2])+")"
+                sql = "INSERT INTO averageData_floor3 (temperature, occupation, noise) VALUES ("+str(averageRoom3[0])+", "+str(averageRoom3[1])+", "+str(averageRoom3[2])+")"
                 mycursor.execute(sql)
                 mydb.commit()
                 send_data_average(sql)
                 time.sleep(5)
                 
                 ## Network ##
-                sql = "INSERT INTO averagedata_network (latency, download_speed, upload_speed) VALUES ("+str(averageNetwork[0])+","+str(averageNetwork[1])+", "+str(averageNetwork[2])+")"
+                sql = "INSERT INTO averageData_network (latency, download_speed, upload_speed) VALUES ("+str(averageNetwork[0])+","+str(averageNetwork[1])+", "+str(averageNetwork[2])+")"
                 mycursor.execute(sql)
                 mydb.commit()
                 send_data_average(sql)
                 time.sleep(5)
                 
                 ## Parking ##
-                sql = "INSERT INTO averagedata_parking(occupation) VALUES ("+str(averageParking)+")"
+                sql = "INSERT INTO averageData_parking(occupation) VALUES ("+str(averageParking)+")"
                 mycursor.execute(sql)
                 mydb.commit()
                 send_data_average(sql)
@@ -367,7 +368,7 @@ def insertAverage():
                 
                 # inserção de averagedata_studyroom é necessário ser apôs as outras
                 room_ids = averageStudyroomIDs()
-                sql = "INSERT INTO averagedata_studyroom (studyroom0_id, studyroom1_id, studyroom2_id, studyroom2PC_id, studyroom3_id) VALUES ('"+str(room_ids[0])+"', '"+str(room_ids[1])+"', '"+str(room_ids[2])+"', '"+str(room_ids[3])+"', '"+str(room_ids[4])+"')"
+                sql = "INSERT INTO averageData_studyroom (studyroom0_id, studyroom1_id, studyroom2_id, studyroom2PC_id, studyroom3_id) VALUES ('"+str(room_ids[0])+"', '"+str(room_ids[1])+"', '"+str(room_ids[2])+"', '"+str(room_ids[3])+"', '"+str(room_ids[4])+"')"
                 mycursor.execute(sql)
                 mydb.commit()
                 send_data_average(sql)
@@ -375,7 +376,7 @@ def insertAverage():
 
                 # inserção de averagedata_averagedata necessita de ser realisada apôs a actualização da restantes averages
                 data_ids = averageDataIDs()
-                sql = "INSERT INTO averagedata_averagedata (timestamp, network_id, parking_id, studyroom_id, weather_id) VALUES ('%s', '1', '1', '1', '1')"
+                sql = "INSERT INTO averageData_averagedata (timestamp, network_id, parking_id, studyroom_id, weather_id) VALUES ('%s', '"+str(data_ids[0])+"', '"+str(data_ids[1])+"', '"+str(data_ids[2])+"', '"+str(data_ids[3])+"')"
                 mycursor.execute(sql, now)
                 mydb.commit()
                 send_data_average(sql)

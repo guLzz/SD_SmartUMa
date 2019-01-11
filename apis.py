@@ -106,28 +106,50 @@ def netNtempAPI():
 
 def noiseAPI():
     try:
-        with urllib.request.urlopen("https://jpborges.pt/smartuma/api/sensors/4/measures") as url:
-            ping = url.read().decode()
-
-        ping_value = json.loads(ping)
-        #print(ping_value) #debug
-
-        noise0 = abs(int(float(ping_value['data'][3]['value'])))
+        with urllib.request.urlopen("http://checkstudynoise.ddns.net/wp-json/sound/sala-estudo-0") as url:
+            sound = url.read().decode()
+        
+        sound_value = json.loads(sound)
+        #print(sound_value) #debug
+        max_value = len(sound_value) - 1
+        noise0 = sound_value[max_value]['value']
         #print(noise0)
-        #######
-        noise1 = abs(int(float(ping_value['data'][5]['value'])))
+
+        with urllib.request.urlopen("http://checkstudynoise.ddns.net/wp-json/sound/sala-estudo-1") as url:
+            sound1 = url.read().decode()
+        
+        sound_value1 = json.loads(sound1)
+        #print(sound_value) #debug
+        max_value1 = len(sound_value1) - 1
+        noise1 = sound_value1[max_value1]['value']
         #print(noise1)
-        #######
-        noise2 = abs(int(float(ping_value['data'][9]['value'])))
+        
+        with urllib.request.urlopen("http://checkstudynoise.ddns.net/wp-json/sound/nucleo-informatica-1") as url:
+            sound2 = url.read().decode()
+        
+        sound_value2 = json.loads(sound2)
+        #print(sound_value) #debug
+        max_value2 = len(sound_value2) - 1
+        noise2 = sound_value2[max_value2]['value']
         #print(noise2)
-        #######
-        noise3 = abs(int(float(ping_value['data'][7]['value'])))
+        
+        with urllib.request.urlopen("http://checkstudynoise.ddns.net/wp-json/sound/sala-estudo-3") as url:
+            sound3 = url.read().decode()
+        
+        sound_value3 = json.loads(sound3)
+        #print(sound_value) #debug
+        max_value3 = len(sound_value3) - 1
+        noise3 = sound_value3[max_value3]['value']
         #print(noise3)
 
         array = [noise0,noise1,noise2,noise3]
         return array
+        
     except:
-        print("failed: noise (rooms)")
+        print("failed: noise (room)")
+
+
+
 #if __name__ == "__main__":
 #    parkingAPI()
 #    netNtempAPI()
