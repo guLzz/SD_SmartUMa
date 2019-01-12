@@ -7,15 +7,15 @@ from datetime import datetime, timedelta
 def getValuesWeather():
     try:
         mydb = pymysql.connect(
-            host="localhost",
-            user="root",
-            passwd="",
-            database="smartUMa"
-            )
-
+        host="localhost",
+        user="root",
+        passwd="",
+        database="smartUMa"
+        )
+        
         with closing( mydb.cursor() ) as mycursor:
             mycursor = mydb.cursor()
-
+            
             tim = datetime.now()
             actualTime = ('{:%Y-%m-%d %H:%M:%S}'.format(tim))
             dayB4 = tim - timedelta(1)
@@ -108,7 +108,7 @@ def getValuesWeather():
         return array
 
     except:
-        print("failed average weather")
+        print("failed: average weather")
 
 def averageWind(result):
     
@@ -118,8 +118,6 @@ def averageWind(result):
         windD.append(x[0])
 
     windDirection = max(set(windD), key=windD.count)
-    
-    #print(windDirection) #
     return windDirection
 
 def getValuesParking():
@@ -387,7 +385,7 @@ def averageDataIDs():
             host="localhost",
             user="root",
             passwd="",
-            database="smartuma"
+            database="smartUMa"
             )
 
         with closing( mydb.cursor() ) as mycursor:
@@ -445,10 +443,10 @@ def averageDataIDs():
 
 
 
-#if __name__ == "__main__":
-#    averageDataIDs()
-#    averageStudyroom()
-#    getValuesWeather()
-#    getValuesParking()    
-#    getValuesNetwork()
-#    getValuesStudyRoom("2")
+# if __name__ == "__main__":
+#     averageDataIDs()
+#     averageStudyroomIDs()
+#     getValuesWeather()
+#     getValuesParking()    
+#     getValuesNetwork()
+#     getValuesStudyRoom("2")

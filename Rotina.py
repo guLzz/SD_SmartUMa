@@ -365,7 +365,19 @@ def insertAverage():
                 mydb.commit()
                 send_data_average(sql)
                 time.sleep(5)
-                
+
+        mydb.close()
+
+
+        with closing( mydb.cursor() ) as mycursor:
+            mycursor = mydb.cursor()
+
+            now = datetime.now() 
+            newday = now.replace(hour=0, minute=0, second=0, microsecond=0)
+            oneAM = now.replace(hour=1, minute=0, second=0, microsecond=0)
+
+            #compara hora atual com 00:00 e 01
+            if((now > newday and now < oneAM) or now == newday):
                 # inserção de averagedata_studyroom é necessário ser apôs as outras
                 room_ids = averageStudyroomIDs()
                 sql = "INSERT INTO averageData_studyroom (studyroom0_id, studyroom1_id, studyroom2_id, studyroom2PC_id, studyroom3_id) VALUES ('"+str(room_ids[0])+"', '"+str(room_ids[1])+"', '"+str(room_ids[2])+"', '"+str(room_ids[3])+"', '"+str(room_ids[4])+"')"
@@ -381,10 +393,8 @@ def insertAverage():
                 mydb.commit()
                 send_data_average(sql)
                 time.sleep(5)
-
-        mydb.close()
-
-
+                
+            mydb.close()
 
     except:
         print("failed: insert average")
