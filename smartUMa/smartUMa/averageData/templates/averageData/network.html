@@ -4,6 +4,8 @@
     document.getElementById("op5").classList.add("active");
 </script>
 
+{% if user.is_authenticated %}
+
     <h2>Network History</h2>
 
     <table>
@@ -26,4 +28,7 @@
         </tr>
         {% endfor %}
     </table>
+{% else %}
+    <h2 id="access">Access denied! Please, login!</h2>
+{% endif %}
 {% endblock %}

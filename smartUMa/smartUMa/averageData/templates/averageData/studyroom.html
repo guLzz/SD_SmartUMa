@@ -5,6 +5,8 @@
     document.getElementById("op6").classList.add("active");
 </script>
 
+{% if user.is_authenticated %}
+
     <h2>Study Room History</h2>
 
     <table>
@@ -86,4 +88,7 @@
 
         {% endfor %}
     </table>
+{% else %}
+    <h2 id="access">Access denied! Please, login!</h2>
+{% endif %}
 {% endblock %}

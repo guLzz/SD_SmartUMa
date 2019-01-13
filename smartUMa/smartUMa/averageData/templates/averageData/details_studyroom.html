@@ -5,6 +5,8 @@
     document.getElementById("op6").classList.add("active");
 </script>
 
+{% if user.is_authenticated %}
+
 <!--Temperature-->
 <table id="gauge-list">
 
@@ -417,4 +419,7 @@
         </td>
     </tr>
 </table>
+{% else %}
+    <h2 id="access">Access denied! Please, login!</h2>
+{% endif %}
 {% endblock %}

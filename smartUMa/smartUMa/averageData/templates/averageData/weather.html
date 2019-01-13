@@ -4,6 +4,9 @@
 <script type= "text/javascript">
     document.getElementById("op3").classList.add("active");
 </script>
+
+{% if user.is_authenticated %}
+
     <h2>Weather History</h2>
 
     <table>
@@ -35,4 +38,7 @@
         </tr>
         {% endfor %}
     </table>
+{% else %}
+    <h2 id="access">Access denied! Please, login!</h2>
+{% endif %}
 {% endblock %}

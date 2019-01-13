@@ -210,13 +210,11 @@
         </li>
     </ul>
 </header>
-{% if user.is_authenticated %}
+
 
 {% block content %}
 {% endblock %}
 
-{% else %}
-    <h2 id="access">Access denied! Please, login!</h2>
-{% endif %}
+
 </body>
 </html>
