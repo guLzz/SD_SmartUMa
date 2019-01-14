@@ -18,7 +18,7 @@ def getValuesWeather():
             
             tim = datetime.now()
             actualTime = ('{:%Y-%m-%d %H:%M:%S}'.format(tim))
-            dayB4 = tim - timedelta(2)
+            dayB4 = tim - timedelta(1)
             dayBefore = ('{:%Y-%m-%d %H:%M:%S}'.format(dayB4))
 
             #print(actualTime)
@@ -134,7 +134,7 @@ def getValuesParking():
 
             tim = datetime.now()
             actualTime = ('{:%Y-%m-%d %H:%M:%S}'.format(tim))
-            dayB4 = tim - timedelta(2)
+            dayB4 = tim - timedelta(1)
             dayBefore = ('{:%Y-%m-%d %H:%M:%S}'.format(dayB4))
 
             sql = "SELECT occupation FROM parking_parking WHERE timestamp BETWEEN '"+ str(dayBefore) +"' AND '"+ str(actualTime) +"'"
@@ -171,7 +171,7 @@ def getValuesNetwork():
 
             tim = datetime.now()
             actualTime = ('{:%Y-%m-%d %H:%M:%S}'.format(tim))
-            dayB4 = tim - timedelta(2)
+            dayB4 = tim - timedelta(1)
             dayBefore = ('{:%Y-%m-%d %H:%M:%S}'.format(dayB4))
 
             ##latencia##
@@ -247,7 +247,7 @@ def getValuesStudyRoom(sala):
 
             tim = datetime.now()
             actualTime = ('{:%Y-%m-%d %H:%M:%S}'.format(tim))
-            dayB4 = tim - timedelta(2)
+            dayB4 = tim - timedelta(1)
             dayBefore = ('{:%Y-%m-%d %H:%M:%S}'.format(dayB4))
 
             ##temperature##
