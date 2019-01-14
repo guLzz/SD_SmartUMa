@@ -35,7 +35,7 @@ def handle_average():
     while(True):
         try:
             insertAverage()
-			averagedataTables()
+            averagedataTables()
             time.sleep(3000) #nao ha necessidade de correr em menos do que quase hora a hora
         except:
             print("failed: handle average")
@@ -300,15 +300,15 @@ def insertAverage():
         host="localhost",
         user="root",
         passwd="",
-        database="smartUMarep"
+        database="smartUMa"
         )
 
         with closing( mydb.cursor() ) as mycursor:
             mycursor = mydb.cursor()
 
             now = datetime.now() 
-            newday = now.replace(hour=0, minute=0, second=0, microsecond=0)
-            oneAM = now.replace(hour=1, minute=0, second=0, microsecond=0)
+            newday = now.replace(hour=11, minute=0, second=0, microsecond=0)
+            oneAM = now.replace(hour=12, minute=0, second=0, microsecond=0)
 
             #compara hora atual com 00:00 e 01
             if((now > newday and now < oneAM) or now == newday):
@@ -367,32 +367,33 @@ def insertAverage():
                 send_data_average(sql)
                 time.sleep(5)
 
-        mydb.close()
+            mydb.close()
 
     except:
         print("failed: insert average")
 
-def averagedataTables():
-	try:
-		data_ids = averageDataIDs()
-		room_ids = averageStudyroomIDs()
 
-		mydb = pymysql.connect(
+def averagedataTables():
+
+    try:
+        data_ids = averageDataIDs()
+        room_ids = averageStudyroomIDs()
+
+        mydb = pymysql.connect(
         host="localhost",
         user="root",
         passwd="",
-        database="smartUMarep"
+        database="smartUMa"
         )
 
-        
-		with closing( mydb.cursor() ) as mycursor:
+        with closing( mydb.cursor() ) as mycursor:
             mycursor = mydb.cursor()
 
             now = datetime.now() 
-            newday = now.replace(hour=0, minute=0, second=0, microsecond=0)
-            oneAM = now.replace(hour=1, minute=0, second=0, microsecond=0)
+            newday = now.replace(hour=11, minute=0, second=0, microsecond=0)
+            oneAM = now.replace(hour=12, minute=0, second=0, microsecond=0)
 
-			#compara hora atual com 00:00 e 01
+            #compara hora atual com 00:00 e 01
             if((now > newday and now < oneAM) or now == newday):
                 # inserção de averagedata_studyroom é necessário ser apôs as outras
                 
@@ -410,10 +411,10 @@ def averagedataTables():
                 send_data_average(sql)
                 time.sleep(5)
 
-			mydb.close()
+            mydb.close()
 
-	except:
-		print("failed: average tables")
+    except:
+        print("failed average data tables")
 
 
 #create thread

@@ -18,7 +18,7 @@ def getValuesWeather():
             
             tim = datetime.now()
             actualTime = ('{:%Y-%m-%d %H:%M:%S}'.format(tim))
-            dayB4 = tim - timedelta(1)
+            dayB4 = tim - timedelta(2)
             dayBefore = ('{:%Y-%m-%d %H:%M:%S}'.format(dayB4))
 
             #print(actualTime)
@@ -134,7 +134,7 @@ def getValuesParking():
 
             tim = datetime.now()
             actualTime = ('{:%Y-%m-%d %H:%M:%S}'.format(tim))
-            dayB4 = tim - timedelta(1)
+            dayB4 = tim - timedelta(2)
             dayBefore = ('{:%Y-%m-%d %H:%M:%S}'.format(dayB4))
 
             sql = "SELECT occupation FROM parking_parking WHERE timestamp BETWEEN '"+ str(dayBefore) +"' AND '"+ str(actualTime) +"'"
@@ -171,7 +171,7 @@ def getValuesNetwork():
 
             tim = datetime.now()
             actualTime = ('{:%Y-%m-%d %H:%M:%S}'.format(tim))
-            dayB4 = tim - timedelta(1)
+            dayB4 = tim - timedelta(2)
             dayBefore = ('{:%Y-%m-%d %H:%M:%S}'.format(dayB4))
 
             ##latencia##
@@ -247,7 +247,7 @@ def getValuesStudyRoom(sala):
 
             tim = datetime.now()
             actualTime = ('{:%Y-%m-%d %H:%M:%S}'.format(tim))
-            dayB4 = tim - timedelta(1)
+            dayB4 = tim - timedelta(2)
             dayBefore = ('{:%Y-%m-%d %H:%M:%S}'.format(dayB4))
 
             ##temperature##
@@ -320,7 +320,7 @@ def averageStudyroomIDs():
             mycursor = mydb.cursor()
             
             ##floor 0
-            sql = "SELECT id FROM averagedata_floor0"
+            sql = "SELECT id FROM averageData_floor0"
             mycursor.execute(sql)
 
             myresult = mycursor.fetchall()
@@ -330,7 +330,7 @@ def averageStudyroomIDs():
             #print(id_F0[0])
 
             ##floor 1
-            sql = "SELECT id FROM averagedata_floor1"
+            sql = "SELECT id FROM averageData_floor1"
             mycursor.execute(sql)
 
             myresult = mycursor.fetchall()
@@ -340,7 +340,7 @@ def averageStudyroomIDs():
             #print(id_F1[0])
             
             ##floor 2
-            sql = "SELECT id FROM averagedata_floor2"
+            sql = "SELECT id FROM averageData_floor2"
             mycursor.execute(sql)
 
             myresult = mycursor.fetchall()
@@ -350,7 +350,7 @@ def averageStudyroomIDs():
             #print(id_F2[0])
 
             ##floor 2-PC
-            sql = "SELECT id FROM averagedata_floor2pc"
+            sql = "SELECT id FROM averageData_floor2pc"
             mycursor.execute(sql)
 
             myresult = mycursor.fetchall()
@@ -360,7 +360,7 @@ def averageStudyroomIDs():
             #print(id_F2PC[0])
 
             ##floor 3
-            sql = "SELECT id FROM averagedata_floor3"
+            sql = "SELECT id FROM averageData_floor3"
             mycursor.execute(sql)
 
             myresult = mycursor.fetchall()
@@ -392,7 +392,7 @@ def averageDataIDs():
             mycursor = mydb.cursor()
             
             ##Network
-            sql = "SELECT id FROM averagedata_network"
+            sql = "SELECT id FROM averageData_network"
             mycursor.execute(sql)
 
             myresult = mycursor.fetchall()
@@ -402,7 +402,7 @@ def averageDataIDs():
             #print(id_Network[0])
 
             ##Parking
-            sql = "SELECT id FROM averagedata_parking"
+            sql = "SELECT id FROM averageData_parking"
             mycursor.execute(sql)
 
             myresult = mycursor.fetchall()
@@ -412,7 +412,7 @@ def averageDataIDs():
             #print(id_Parking[0])
             
             ##Studyrooms
-            sql = "SELECT id FROM averagedata_studyroom"
+            sql = "SELECT id FROM averageData_studyroom"
             mycursor.execute(sql)
 
             myresult = mycursor.fetchall()
@@ -422,7 +422,7 @@ def averageDataIDs():
             #print(id_Studyroom[0])
 
             ##Weather
-            sql = "SELECT id FROM averagedata_weather"
+            sql = "SELECT id FROM averageData_weather"
             mycursor.execute(sql)
 
             myresult = mycursor.fetchall()
