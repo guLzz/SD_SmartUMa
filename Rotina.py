@@ -300,20 +300,20 @@ def insertAverage():
         host="localhost",
         user="root",
         passwd="",
-        database="smartUMa"
+        database="smartUMarep"
         )
 
         with closing( mydb.cursor() ) as mycursor:
             mycursor = mydb.cursor()
 
             now = datetime.now() 
-            newday = now.replace(hour=11, minute=0, second=0, microsecond=0)
-            oneAM = now.replace(hour=12, minute=0, second=0, microsecond=0)
+            newday = now.replace(hour=0, minute=0, second=0, microsecond=0)
+            oneAM = now.replace(hour=1, minute=0, second=0, microsecond=0)
 
             #compara hora atual com 00:00 e 01
             if((now > newday and now < oneAM) or now == newday):
                 ## weather ##
-                sql = "INSERT INTO averageData_weather (temperature, humidity, wind_speed, wind_direction, solar_intensity) VALUES ("+str(averageWeather[0])+", "+str(averageWeather[1])+", "+str(averageWeather[2])+","+str(averageWeather[3])+","+str(averageWeather[4])+")"
+                sql = "INSERT INTO averageData_weather (temperature, humidity, wind_speed, wind_direction, solar_intensity) VALUES ("+str(averageWeather[0])+", "+str(averageWeather[1])+", "+str(averageWeather[2])+",'"+averageWeather[3]+"',"+str(averageWeather[4])+")"
                 mycursor.execute(sql)
                 mydb.commit()
                 send_data_average(sql)
@@ -378,20 +378,22 @@ def averagedataTables():
     try:
         data_ids = averageDataIDs()
         room_ids = averageStudyroomIDs()
+        tim = datetime.now()
+        data_ids.append('{:%Y-%m-%d %H:%M:%S}'.format(tim))
 
         mydb = pymysql.connect(
         host="localhost",
         user="root",
         passwd="",
-        database="smartUMa"
+        database="smartUMarep"
         )
 
         with closing( mydb.cursor() ) as mycursor:
             mycursor = mydb.cursor()
 
             now = datetime.now() 
-            newday = now.replace(hour=11, minute=0, second=0, microsecond=0)
-            oneAM = now.replace(hour=12, minute=0, second=0, microsecond=0)
+            newday = now.replace(hour=0, minute=0, second=0, microsecond=0)
+            oneAM = now.replace(hour=1, minute=0, second=0, microsecond=0)
 
             #compara hora atual com 00:00 e 01
             if((now > newday and now < oneAM) or now == newday):
@@ -406,7 +408,8 @@ def averagedataTables():
                 # inserção de averagedata_averagedata necessita de ser realisada apôs a actualização da restantes averages
                 
                 sql = "INSERT INTO averageData_averagedata (timestamp, network_id, parking_id, studyroom_id, weather_id) VALUES ('%s', '"+str(data_ids[0])+"', '"+str(data_ids[1])+"', '"+str(data_ids[2])+"', '"+str(data_ids[3])+"')"
-                mycursor.execute(sql, now)
+                val = data_ids[4]
+                mycursor.execute(sql, val)
                 mydb.commit()
                 send_data_average(sql)
                 time.sleep(5)
