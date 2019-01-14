@@ -35,7 +35,8 @@ def handle_average():
     while(True):
         try:
             insertAverage()
-			averagedataTables()
+            averagedataTableStudy()
+            averagedataTables()
             time.sleep(3000) #nao ha necessidade de correr em menos do que quase hora a hora
         except:
             print("failed: handle average")
@@ -313,7 +314,7 @@ def insertAverage():
             #compara hora atual com 00:00 e 01
             if((now > newday and now < oneAM) or now == newday):
                 ## weather ##
-                sql = "INSERT INTO averageData_weather (temperature, humidity, wind_speed, wind_direction, solar_intensity) VALUES ("+str(averageWeather[0])+", "+str(averageWeather[1])+", "+str(averageWeather[2])+","+str(averageWeather[3])+","+str(averageWeather[4])+")"
+                sql = "INSERT INTO averageData_weather (temperature, humidity, wind_speed, wind_direction, solar_intensity) VALUES ("+str(averageWeather[0])+", "+str(averageWeather[1])+", "+str(averageWeather[2])+",'"+averageWeather[3]+"',"+str(averageWeather[4])+")"
                 mycursor.execute(sql)
                 mydb.commit()
                 send_data_average(sql)
@@ -367,53 +368,79 @@ def insertAverage():
                 send_data_average(sql)
                 time.sleep(5)
 
-        mydb.close()
+            mydb.close()
 
     except:
         print("failed: insert average")
 
-def averagedataTables():
-	try:
-		data_ids = averageDataIDs()
-		room_ids = averageStudyroomIDs()
 
-		mydb = pymysql.connect(
+def averagedataTableStudy():
+
+    try:
+        room_ids = averageStudyroomIDs()
+
+        mydb = pymysql.connect(
         host="localhost",
         user="root",
         passwd="",
         database="smartUMarep"
         )
 
-        
-		with closing( mydb.cursor() ) as mycursor:
+        with closing( mydb.cursor() ) as mycursor:
             mycursor = mydb.cursor()
 
             now = datetime.now() 
             newday = now.replace(hour=0, minute=0, second=0, microsecond=0)
             oneAM = now.replace(hour=1, minute=0, second=0, microsecond=0)
 
-			#compara hora atual com 00:00 e 01
+            #compara hora atual com 00:00 e 01
             if((now > newday and now < oneAM) or now == newday):
                 # inserção de averagedata_studyroom é necessário ser apôs as outras
                 
-                sql = "INSERT INTO averageData_studyroom (studyroom0_id, studyroom1_id, studyroom2_id, studyroom2PC_id, studyroom3_id) VALUES ('"+str(room_ids[0])+"', '"+str(room_ids[1])+"', '"+str(room_ids[2])+"', '"+str(room_ids[3])+"', '"+str(room_ids[4])+"')"
+                sql = "INSERT INTO averageData_studyroom (studyroom0_id, studyroom1_id, studyroom2_id, studyroom2PC_id, studyroom3_id) VALUES ("+str(room_ids[0])+", "+str(room_ids[1])+", "+str(room_ids[2])+", "+str(room_ids[3])+", "+str(room_ids[4])+")"
                 mycursor.execute(sql)
                 mydb.commit()
                 send_data_average(sql)
                 time.sleep(5)
 
-                # inserção de averagedata_averagedata necessita de ser realisada apôs a actualização da restantes averages
-                
-                sql = "INSERT INTO averageData_averagedata (timestamp, network_id, parking_id, studyroom_id, weather_id) VALUES ('%s', '"+str(data_ids[0])+"', '"+str(data_ids[1])+"', '"+str(data_ids[2])+"', '"+str(data_ids[3])+"')"
-                mycursor.execute(sql, now)
+            mydb.close()
+
+    except:
+        print("failed average data tables")
+
+def averagedataTables():
+    try:
+        data_ids = averageDataIDs()
+        tim = datetime.now()
+        data_ids.append('{:%Y-%m-%d %H:%M:%S}'.format(tim))
+
+        mydb = pymysql.connect(
+        host="localhost",
+        user="root",
+        passwd="",
+        database="smartUMarep"
+        )
+
+        with closing( mydb.cursor() ) as mycursor:
+            mycursor = mydb.cursor()
+
+            now = datetime.now() 
+            newday = now.replace(hour=0, minute=0, second=0, microsecond=0)
+            oneAM = now.replace(hour=1, minute=0, second=0, microsecond=0)
+
+            #compara hora atual com 00:00 e 01
+            if((now > newday and now < oneAM) or now == newday):    
+                sql = "INSERT INTO averageData_averagedata (timestamp, network_id, parking_id, studyroom_id, weather_id) VALUES (%s, "+str(data_ids[0])+", "+str(data_ids[1])+", "+str(data_ids[2])+", "+str(data_ids[3])+")"
+                val = data_ids[4]
+                mycursor.execute(sql, val)
                 mydb.commit()
                 send_data_average(sql)
                 time.sleep(5)
 
-			mydb.close()
+            mydb.close()
 
-	except:
-		print("failed: average tables")
+    except:
+        print("failed: average table")
 
 
 #create thread

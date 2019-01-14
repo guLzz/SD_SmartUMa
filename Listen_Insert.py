@@ -45,7 +45,7 @@ def listen_weather():
                             mycursor.execute(sql,valor)
                             mydb.commit()
 
-                        mydb.close()
+                            mydb.close()
         except:
             print("failed: listen average")
             continue
@@ -84,7 +84,7 @@ def listen_api():
                             mycursor.execute(sql,valor)
                             mydb.commit()
 
-                        mydb.close()
+                            mydb.close()
         except:
             print("failed: listen average")
             continue
@@ -127,7 +127,7 @@ def listen_average():
                                 mycursor.execute(sql,valor)
                                 mydb.commit()
 
-                            mydb.close()
+                                mydb.close()
 
                         else:
                             #insert sql sem timestamp
@@ -145,7 +145,7 @@ def listen_average():
                                 mycursor.execute(sql)
                                 mydb.commit()
 
-                            mydb.close()
+                                mydb.close()
         except:
             print("failed: listen average")
             continue
